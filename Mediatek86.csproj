@@ -90,6 +90,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="controleur\Controle.cs" />
+    <Compile Include="mediatek86DataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>mediatek86DataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="metier\Dvd.cs" />
     <Compile Include="metier\Etat.cs" />
     <Compile Include="metier\LivreDvd.cs" />
@@ -123,6 +128,17 @@
     <EmbeddedResource Include="vue\FrmMediatek.resx">
       <DependentUpon>FrmMediatek.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="mediatek86DataSet.xsc">
+      <DependentUpon>mediatek86DataSet.xsd</DependentUpon>
+    </None>
+    <None Include="mediatek86DataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>mediatek86DataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="mediatek86DataSet.xss">
+      <DependentUpon>mediatek86DataSet.xsd</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
