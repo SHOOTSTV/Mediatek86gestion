@@ -1313,19 +1313,19 @@ namespace Mediatek86.vue
         /// <summary>
         /// Affichage des informations du livre sélectionné
         /// </summary>
-        /// <param name="livre"></param>
-        private void AfficheLivresInfosCmd(Livre livre)
+        /// <param name="document"></param>
+        private void AfficheLivresInfosCmd(CommandeDocumentLivre document)
         {
-            txbLivresAuteurCmd.Text = livre.Auteur;
-            txbLivresCollectionCmd.Text = livre.Collection;
-            txbLivresImageCmd.Text = livre.Image;
-            txbLivresIsbnCmd.Text = livre.Isbn;
-            txbLivresNumeroCmd.Text = livre.Id;
-            txbLivresGenreCmd.Text = livre.Genre;
-            txbLivresPublicCmd.Text = livre.Public;
-            txbLivresRayonCmd.Text = livre.Rayon;
-            txbLivresTitreCmd.Text = livre.Titre;
-            string image = livre.Image;
+            txbLivresAuteurCmd.Text = document.Auteur;
+            txbLivresCollectionCmd.Text = document.Collection;
+            txbLivresImageCmd.Text = document.Image;
+            txbLivresIsbnCmd.Text = document.Isbn;
+            txbLivresNumeroCmd.Text = document.Id;
+            txbLivresGenreCmd.Text = document.Genre;
+            txbLivresPublicCmd.Text = document.Typepublic;
+            txbLivresRayonCmd.Text = document.Rayon;
+            txbLivresTitreCmd.Text = document.Titre;
+            string image = document.Image;
             try
             {
                 pcbLivresImageCmd.Image = Image.FromFile(image);
@@ -1336,6 +1336,40 @@ namespace Mediatek86.vue
             }
         }
 
+
+        /// <summary>
+        /// Sur la sélection d'une ligne ou cellule dans le grid
+        /// affichage des informations du livre
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgvListeCmdLivres_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvListeCmdLivres.CurrentCell != null)
+            {
+                try
+                {
+                    CommandeDocumentLivre document = (CommandeDocumentLivre)bdgLivresListeCmd.List[bdgLivresListeCmd.Position];
+                    AfficheLivresInfosCmd(document);
+                }
+                catch
+                {
+                    VideLivresZonesCmd();
+                }
+            }
+            else
+            {
+                VideLivresZonesCmd();
+            }
+        }
+
+        /// <summary>
+        /// vide les zones de recherche et de filtre
+        /// </summary>
+        private void VideLivresZonesCmd()
+        {
+            txbLivresNumRechercheCmd.Text = "";
+        }
         #endregion
     }
 }
