@@ -262,5 +262,52 @@ namespace Mediatek86.modele
             }
         }
 
+        public static List<CommandeDocumentLivre> GetAllCommandes()
+        {
+            List<CommandeDocumentLivre> lesCommandes = null;
+            try
+            {
+                lesCommandes = new List<CommandeDocumentLivre>();
+                string req = "SELECT c.id as id_commande, c.dateCommande as dateCommande, c.montant as montant, cd.nbExemplaire as nbExemplaire, cd.idLivreDvd as idLivre, s.id as id_etat, s.libelle as libelle, l.isbn as isbn, l.auteur as auteur, l.collection as collection, d.titre as titre, g.libelle as genre, p.libelle as public, r.libelle as rayon ";
+                req += "FROM `commande`c LEFT JOIN `commandedocument` cd USING(id) ";
+                req += "LEFT JOIN `suivi` s ON s.id = cd.idSuivi ";
+                req += "LEFT JOIN `livre` l ON l.id = cd.idLivreDvd ";
+                req += "LEFT JOIN `document` d ON d.id = cd.idLivreDvd ";
+                req += "JOIN rayon r on r.id=d.idRayon ";
+                req += "JOIN genre g on g.id=d.idGenre ";
+                req += "JOIN public p on p.id=d.idPublic";
+                BddMySql curs = BddMySql.GetInstance(connectionString);
+                curs.ReqSelect(req, null);
+
+                while (curs.Read())
+                {
+                    CommandeDocumentLivre commandeDocument = new CommandeDocumentLivre(
+                        (string)curs.Field("id_commande"),
+                        (DateTime)curs.Field("dateCommande"),
+                        (double)curs.Field("montant"),
+                        (int)curs.Field("nbExemplaire"),
+                        (string)curs.Field("idLivre"),
+                        (string)curs.Field("id_etat"),
+                        (string)curs.Field("libelle"),
+                        (string)curs.Field("isbn"),
+                        (string)curs.Field("auteur"),
+                        (string)curs.Field("collection"),
+                        (string)curs.Field("titre"),
+                        (string)curs.Field("genre"),
+                        (string)curs.Field("public"),
+                        (string)curs.Field("rayon"),
+                        (string)curs.Field("image")
+                        );
+                    lesCommandes.Add(commandeDocument);
+                }
+                curs.Close();
+                return lesCommandes;
+            }
+            catch (Exception e)
+            {
+                return lesCommandes;
+            }
+        }
+
     }
 }

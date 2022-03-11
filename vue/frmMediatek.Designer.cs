@@ -281,6 +281,7 @@ namespace Mediatek86.vue
             this.tabOngletsApplication.SelectedIndex = 0;
             this.tabOngletsApplication.Size = new System.Drawing.Size(883, 659);
             this.tabOngletsApplication.TabIndex = 0;
+            this.tabOngletsApplication.Enter += new System.EventHandler(this.tabCmdLivres_Enter);
             // 
             // tabLivres
             // 
@@ -2088,7 +2089,7 @@ namespace Mediatek86.vue
             this.dgvListeCmdLivres.ReadOnly = true;
             this.dgvListeCmdLivres.RowHeadersVisible = false;
             this.dgvListeCmdLivres.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvListeCmdLivres.Size = new System.Drawing.Size(844, 200);
+            this.dgvListeCmdLivres.Size = new System.Drawing.Size(584, 200);
             this.dgvListeCmdLivres.TabIndex = 4;
             // 
             // tabCmdDvd

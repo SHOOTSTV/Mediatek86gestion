@@ -28,6 +28,7 @@ namespace Mediatek86.vue
         private List<Dvd> lesDvd = new List<Dvd>();
         private List<Revue> lesRevues = new List<Revue>();
         private List<Exemplaire> lesExemplaires = new List<Exemplaire>();
+        private List<CommandeDocumentLivre> lesCommandes = new List<CommandeDocumentLivre>();
 
         #endregion
 
@@ -1284,15 +1285,55 @@ namespace Mediatek86.vue
         // ONGLET "COMMANDES DE LIVRES"
         //-----------------------------------------------------------
 
+        /// <summary>
+        /// Ouverture de l'onglet Commandes de Livres : 
+        /// appel des méthodes pour remplir le datagrid des commandes de livres
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tabCmdLivres_Enter(object sender, EventArgs e)
         {
-            lesLivres = controle.GetAllLivres();
-            InitDataGridViewLivre(lesLivres);
+            lesCommandes = controle.GetAllCommandes();
+            InitDataGridViewLivre(lesCommandes);
         }
-        private void InitDataGridViewLivre(List<Livre> documents)
+
+        /// <summary>
+        /// Remplit le dategrid avec la liste reçue en paramètre
+        /// </summary>
+        private void InitDataGridViewLivre(List<CommandeDocumentLivre> documents)
         {
             bdgLivresListeCmd.DataSource = documents;
             dgvListeCmdLivres.DataSource = bdgLivresListeCmd;
+            dgvListeCmdLivres.Columns["id"].Visible = false;
+            dgvListeCmdLivres.Columns["idlivredvd"].Visible = false;
+            dgvListeCmdLivres.Columns["idsuivi"].Visible = false;
+            dgvListeCmdLivres.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+        }
+
+        /// <summary>
+        /// Affichage des informations du livre sélectionné
+        /// </summary>
+        /// <param name="livre"></param>
+        private void AfficheLivresInfosCmd(Livre livre)
+        {
+            txbLivresAuteurCmd.Text = livre.Auteur;
+            txbLivresCollectionCmd.Text = livre.Collection;
+            txbLivresImageCmd.Text = livre.Image;
+            txbLivresIsbnCmd.Text = livre.Isbn;
+            txbLivresNumeroCmd.Text = livre.Id;
+            txbLivresGenreCmd.Text = livre.Genre;
+            txbLivresPublicCmd.Text = livre.Public;
+            txbLivresRayonCmd.Text = livre.Rayon;
+            txbLivresTitreCmd.Text = livre.Titre;
+            string image = livre.Image;
+            try
+            {
+                pcbLivresImageCmd.Image = Image.FromFile(image);
+            }
+            catch
+            {
+                pcbLivresImageCmd.Image = null;
+            }
         }
 
         #endregion
