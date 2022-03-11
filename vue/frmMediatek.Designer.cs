@@ -2091,6 +2091,7 @@ namespace Mediatek86.vue
             this.dgvListeCmdLivres.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvListeCmdLivres.Size = new System.Drawing.Size(584, 200);
             this.dgvListeCmdLivres.TabIndex = 4;
+            this.dgvListeCmdLivres.SelectionChanged += new System.EventHandler(this.dgvListeCmdLivres_SelectionChanged);
             // 
             // tabCmdDvd
             // 
