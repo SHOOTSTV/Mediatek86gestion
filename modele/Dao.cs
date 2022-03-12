@@ -262,6 +262,10 @@ namespace Mediatek86.modele
             }
         }
 
+        /// <summary>
+        /// Retourne toutes les commandes de livres à partir de la BDD
+        /// </summary>
+        /// <returns>Liste d'objets Commandes</returns>
         public static List<CommandeDocumentLivre> GetAllCommandes()
         {
             List<CommandeDocumentLivre> lesCommandes = null;
@@ -275,7 +279,7 @@ namespace Mediatek86.modele
                 req += "LEFT JOIN `document` d ON d.id = cd.idLivreDvd ";
                 req += "JOIN rayon r on r.id=d.idRayon ";
                 req += "JOIN genre g on g.id=d.idGenre ";
-                req += "JOIN public p on p.id=d.idPublic";
+                req += "JOIN public p on p.id=d.idPublic ORDER BY c.dateCommande DESC";                
                 BddMySql curs = BddMySql.GetInstance(connectionString);
                 curs.ReqSelect(req, null);
 
@@ -303,10 +307,43 @@ namespace Mediatek86.modele
                 curs.Close();
                 return lesCommandes;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return lesCommandes;
             }
+        }
+
+        /// <summary>
+        /// Demande d'ajout d'une commande
+        /// </summary>
+        /// <param name="commande"></param>
+        public static void AddCommande(Commande commande)
+        {
+            string req = "INSERT INTO commande(id,dateCommande,montant) ";
+            req += "values (@id, @dateCommande, @montant);";
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("@id", commande.Id);
+            parameters.Add("@dateCommande", commande.DateCommande);
+            parameters.Add("@montant", commande.Montant);
+            BddMySql curs = BddMySql.GetInstance(connectionString);
+            curs.ReqUpdate(req, parameters);
+        }
+
+        /// <summary>
+        /// Demande d'ajout d'une commandedocument
+        /// </summary>
+        /// <param name="commandedocument"></param>
+        public static void AddCommandeDocument(CommandeDocument commandedocument)
+        {
+            string req = "INSERT INTO commandedocument(id, nbExemplaire, idLivreDvd, idSuivi)";
+            req += "values (@id, @nbExemplaire, @idLivreDvd, @idSuivi);";
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("@id", commandedocument.Id);
+            parameters.Add("@nbExemplaire", commandedocument.NbExemplaire);
+            parameters.Add("@idLivreDvd", commandedocument.IdLivredvd);
+            parameters.Add("@idSuivi", 00001);
+            BddMySql curs = BddMySql.GetInstance(connectionString);
+            curs.ReqUpdate(req, parameters);
         }
 
     }

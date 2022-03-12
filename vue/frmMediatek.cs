@@ -1295,6 +1295,7 @@ namespace Mediatek86.vue
         {
             lesCommandes = controle.GetAllCommandes();
             InitDataGridViewLivre(lesCommandes);
+            RemplirCbLivre();
         }
 
         /// <summary>
@@ -1307,6 +1308,15 @@ namespace Mediatek86.vue
             dgvListeCmdLivres.Columns["id"].Visible = false;
             dgvListeCmdLivres.Columns["idlivredvd"].Visible = false;
             dgvListeCmdLivres.Columns["idsuivi"].Visible = false;
+            dgvListeCmdLivres.Columns["auteur"].Visible = false;
+            dgvListeCmdLivres.Columns["isbn"].Visible = false;
+            dgvListeCmdLivres.Columns["id"].Visible = false;
+            dgvListeCmdLivres.Columns["collection"].Visible = false;
+            dgvListeCmdLivres.Columns["genre"].Visible = false;
+            dgvListeCmdLivres.Columns["rayon"].Visible = false;
+            dgvListeCmdLivres.Columns["typepublic"].Visible = false;
+            dgvListeCmdLivres.Columns["titre"].Visible = false;
+            dgvListeCmdLivres.Columns["image"].Visible = false;
             dgvListeCmdLivres.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
 
@@ -1370,6 +1380,76 @@ namespace Mediatek86.vue
         {
             txbLivresNumRechercheCmd.Text = "";
         }
+
+        /// <summary>
+        /// Affiche les livres dans les combobox d'ajout d'une commande
+        /// </summary>
+        public void RemplirCbLivre()
+        {
+            List<Livre> livres = controle.GetAllLivres();
+            bdgLivresListe.DataSource = livres;
+            cboLivres.DataSource = bdgLivresListe;
+            if (cboLivres.Items.Count > 0)
+            {
+                cboLivres.SelectedIndex = 0;
+            }
+        }
+
+        /// <summary>
+        /// Ouvre et referme l'interface pour ajouter une commande
+        /// </summary>
+        private void btnLivresAjouterCmd_Click(object sender, EventArgs e)
+        {
+            if (grpLivresCmdAjout.Enabled == false)
+            {
+                grpLivresCmdAjout.Enabled = true;
+            }
+            else
+            {
+                grpLivresCmdAjout.Enabled = false;
+            }           
+        }
+        /// <summary>
+        /// Ouvre et referme l'interface pour modifier le statu d'une commande
+        /// </summary>
+        private void btnLivresModifCmd_Click(object sender, EventArgs e)
+        {
+            if (grpLivresCmdModif.Enabled == false)
+            {
+                grpLivresCmdModif.Enabled = true;
+            }
+            else
+            {
+                grpLivresCmdModif.Enabled = false;
+            }
+        }
+
+        /// <summary>
+        /// Demande d'ajout d'une commande
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSaveCmd_Click(object sender, EventArgs e)
+        {
+            if (!txbIdCmdAdd.Text.Equals("") && numMontantCmdAdd.Value > 0 && numNbExemplaireCmdAdd.Value >= 1 &&  MessageBox.Show("Etes vous sûr?", "Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                int Montant = (int)numMontantCmdAdd.Value;
+                int NbExemplaire = (int)numNbExemplaireCmdAdd.Value;
+                Commande commande = new Commande(txbIdCmdAdd.Text, dtpDateCmdAdd.Value, Montant);
+                CommandeDocument commandedocument = new CommandeDocument(txbIdCmdAdd.Text, NbExemplaire, cboLivres.Text);
+
+                controle.AddCommande(commande);
+                controle.AddCommandeDocument(commandedocument);
+
+                InitDataGridViewLivre(lesCommandes);
+                VideLivresZonesCmd();
+            }
+            else
+            {
+                MessageBox.Show("Tous les champs doivent être remplis correctement.", "Information");
+            }
+        }
+
         #endregion
     }
 }

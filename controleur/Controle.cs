@@ -113,6 +113,25 @@ namespace Mediatek86.controleur
         {
             return lesCommandes;
         }
+
+        /// <summary>
+        /// Demande d'ajout d'une commande
+        /// </summary>
+        /// <param name="commande"></param>
+        public void AddCommande(Commande commande)
+        {
+            Dao.AddCommande(commande);
+        }
+
+
+        /// <summary>
+        /// Demande d'ajout d'une commande document
+        /// </summary>
+        /// <param name="commande"></param>
+        public void AddCommandeDocument(CommandeDocument commandedocument)
+        {
+            Dao.AddCommandeDocument(commandedocument);
+        }
     }
 
 }

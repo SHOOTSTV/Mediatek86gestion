@@ -95,6 +95,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>mediatek86DataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="metier\CommandeDocument.cs" />
+    <Compile Include="metier\Commande.cs" />
     <Compile Include="metier\CommandeDocumentLivre.cs" />
     <Compile Include="metier\Dvd.cs" />
     <Compile Include="metier\Etat.cs" />
