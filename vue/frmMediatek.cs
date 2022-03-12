@@ -1294,15 +1294,16 @@ namespace Mediatek86.vue
         private void tabCmdLivres_Enter(object sender, EventArgs e)
         {
             lesCommandesLivres = controle.GetAllCommandesLivres();
-            InitDataGridViewLivre(lesCommandesLivres);
+            InitDataGridViewLivre();
             RemplirCbLivre();
         }
 
         /// <summary>
         /// Remplit le dategrid avec la liste reçue en paramètre
         /// </summary>
-        private void InitDataGridViewLivre(List<CommandeDocumentLivre> documents)
+        private void InitDataGridViewLivre()
         {
+            List<CommandeDocumentLivre> documents = controle.GetAllCommandesLivres();
             bdgLivresListeCmd.DataSource = documents;
             dgvListeCmdLivres.DataSource = bdgLivresListeCmd;
             dgvListeCmdLivres.Columns["id"].Visible = false;
@@ -1454,8 +1455,9 @@ namespace Mediatek86.vue
                 controle.AddCommande(commande);
                 controle.AddCommandeDocument(commandedocument);
 
-                InitDataGridViewLivre(lesCommandesLivres);
+                InitDataGridViewLivre();
                 VideLivreAjoutCmd();
+                grpLivresCmdAjout.Enabled = false;
             }
             else
             {
