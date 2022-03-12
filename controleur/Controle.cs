@@ -14,7 +14,7 @@ namespace Mediatek86.controleur
         private readonly List<Categorie> lesRayons;
         private readonly List<Categorie> lesPublics;
         private readonly List<Categorie> lesGenres;
-        private readonly List<CommandeDocumentLivre> lesCommandes;
+        private List<CommandeDocumentLivre> lesCommandesLivres;
 
         /// <summary>
         /// Ouverture de la fenêtre
@@ -27,7 +27,6 @@ namespace Mediatek86.controleur
             lesGenres = Dao.GetAllGenres();
             lesRayons = Dao.GetAllRayons();
             lesPublics = Dao.GetAllPublics();
-            lesCommandes = Dao.GetAllCommandes();
             FrmMediatek frmMediatek = new FrmMediatek(this);
             frmMediatek.ShowDialog();
         }
@@ -106,12 +105,13 @@ namespace Mediatek86.controleur
         }
 
         /// <summary>
-        /// getter sur la liste des commandes
+        /// getter sur la liste des commandes de livres
         /// </summary>
         /// <returns>Collection d'objets Commandes</returns>
-        public List<CommandeDocumentLivre> GetAllCommandes()
+        public List<CommandeDocumentLivre> GetAllCommandesLivres()
         {
-            return lesCommandes;
+            lesCommandesLivres = Dao.GetAllCommandesLivres();
+            return lesCommandesLivres;
         }
 
         /// <summary>
@@ -123,11 +123,10 @@ namespace Mediatek86.controleur
             Dao.AddCommande(commande);
         }
 
-
         /// <summary>
         /// Demande d'ajout d'une commande document
         /// </summary>
-        /// <param name="commande"></param>
+        /// <param name="commandedocument"></param>
         public void AddCommandeDocument(CommandeDocument commandedocument)
         {
             Dao.AddCommandeDocument(commandedocument);

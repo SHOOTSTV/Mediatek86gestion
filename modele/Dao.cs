@@ -266,12 +266,12 @@ namespace Mediatek86.modele
         /// Retourne toutes les commandes de livres à partir de la BDD
         /// </summary>
         /// <returns>Liste d'objets Commandes</returns>
-        public static List<CommandeDocumentLivre> GetAllCommandes()
+        public static List<CommandeDocumentLivre> GetAllCommandesLivres()
         {
-            List<CommandeDocumentLivre> lesCommandes = null;
+            List<CommandeDocumentLivre> lesCommandesLivres = null;
             try
             {
-                lesCommandes = new List<CommandeDocumentLivre>();
+                lesCommandesLivres = new List<CommandeDocumentLivre>();
                 string req = "SELECT c.id as id_commande, c.dateCommande as dateCommande, c.montant as montant, cd.nbExemplaire as nbExemplaire, cd.idLivreDvd as idLivre, s.id as id_etat, s.libelle as libelle, l.isbn as isbn, l.auteur as auteur, l.collection as collection, d.titre as titre, g.libelle as genre, p.libelle as public, r.libelle as rayon ";
                 req += "FROM `commande`c LEFT JOIN `commandedocument` cd USING(id) ";
                 req += "LEFT JOIN `suivi` s ON s.id = cd.idSuivi ";
@@ -302,14 +302,14 @@ namespace Mediatek86.modele
                         (string)curs.Field("rayon"),
                         (string)curs.Field("image")
                         );
-                    lesCommandes.Add(commandeDocument);
+                    lesCommandesLivres.Add(commandeDocument);
                 }
                 curs.Close();
-                return lesCommandes;
+                return lesCommandesLivres;
             }
             catch (Exception)
             {
-                return lesCommandes;
+                return lesCommandesLivres;
             }
         }
 
@@ -341,7 +341,7 @@ namespace Mediatek86.modele
             parameters.Add("@id", commandedocument.Id);
             parameters.Add("@nbExemplaire", commandedocument.NbExemplaire);
             parameters.Add("@idLivreDvd", commandedocument.IdLivredvd);
-            parameters.Add("@idSuivi", 00001);
+            parameters.Add("@idSuivi", "00001");
             BddMySql curs = BddMySql.GetInstance(connectionString);
             curs.ReqUpdate(req, parameters);
         }

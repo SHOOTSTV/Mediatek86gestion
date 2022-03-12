@@ -28,7 +28,7 @@ namespace Mediatek86.vue
         private List<Dvd> lesDvd = new List<Dvd>();
         private List<Revue> lesRevues = new List<Revue>();
         private List<Exemplaire> lesExemplaires = new List<Exemplaire>();
-        private List<CommandeDocumentLivre> lesCommandes = new List<CommandeDocumentLivre>();
+        private List<CommandeDocumentLivre> lesCommandesLivres = new List<CommandeDocumentLivre>();
 
         #endregion
 
@@ -1293,8 +1293,8 @@ namespace Mediatek86.vue
         /// <param name="e"></param>
         private void tabCmdLivres_Enter(object sender, EventArgs e)
         {
-            lesCommandes = controle.GetAllCommandes();
-            InitDataGridViewLivre(lesCommandes);
+            lesCommandesLivres = controle.GetAllCommandesLivres();
+            InitDataGridViewLivre(lesCommandesLivres);
             RemplirCbLivre();
         }
 
@@ -1382,6 +1382,18 @@ namespace Mediatek86.vue
         }
 
         /// <summary>
+        /// vide les zones de saisie d'une commande
+        /// </summary>
+        private void VideLivreAjoutCmd()
+        {
+            txbIdCmdAdd.Text = "";
+            numMontantCmdAdd.Value = 0;
+            numNbExemplaireCmdAdd.Value = 0;
+
+
+        }
+
+        /// <summary>
         /// Affiche les livres dans les combobox d'ajout d'une commande
         /// </summary>
         public void RemplirCbLivre()
@@ -1435,14 +1447,15 @@ namespace Mediatek86.vue
             {
                 int Montant = (int)numMontantCmdAdd.Value;
                 int NbExemplaire = (int)numNbExemplaireCmdAdd.Value;
+
                 Commande commande = new Commande(txbIdCmdAdd.Text, dtpDateCmdAdd.Value, Montant);
-                CommandeDocument commandedocument = new CommandeDocument(txbIdCmdAdd.Text, NbExemplaire, cboLivres.Text);
+                CommandeDocument commandedocument = new CommandeDocument(txbIdCmdAdd.Text, NbExemplaire, ((CommandeDocumentLivre)bdgLivresListeCmd.List[bdgLivresListeCmd.Position]).IdLivredvd);
 
                 controle.AddCommande(commande);
                 controle.AddCommandeDocument(commandedocument);
 
-                InitDataGridViewLivre(lesCommandes);
-                VideLivresZonesCmd();
+                InitDataGridViewLivre(lesCommandesLivres);
+                VideLivreAjoutCmd();
             }
             else
             {
