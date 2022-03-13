@@ -1307,7 +1307,29 @@ namespace Mediatek86.vue
             bdgLivresListeCmd.DataSource = documents;
             dgvListeCmdLivres.DataSource = bdgLivresListeCmd;
             dgvListeCmdLivres.Columns["id"].Visible = false;
-            dgvListeCmdLivres.Columns["idlivredvd"].Visible = false;
+         // dgvListeCmdLivres.Columns["idlivredvd"].Visible = false;
+            dgvListeCmdLivres.Columns["idsuivi"].Visible = false;
+            dgvListeCmdLivres.Columns["auteur"].Visible = false;
+            dgvListeCmdLivres.Columns["isbn"].Visible = false;
+            dgvListeCmdLivres.Columns["id"].Visible = false;
+            dgvListeCmdLivres.Columns["collection"].Visible = false;
+            dgvListeCmdLivres.Columns["genre"].Visible = false;
+            dgvListeCmdLivres.Columns["rayon"].Visible = false;
+            dgvListeCmdLivres.Columns["typepublic"].Visible = false;
+            dgvListeCmdLivres.Columns["titre"].Visible = false;
+            dgvListeCmdLivres.Columns["image"].Visible = false;
+            dgvListeCmdLivres.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+        }
+
+        /// <summary>
+        /// Remplit le dategrid avec l'id d'un livre reçue en paramètre
+        /// </summary>
+        private void InitDataGridViewLivreRecherche(List<CommandeDocumentLivre> documents)
+        {
+            bdgLivresListeCmd.DataSource = documents;
+            dgvListeCmdLivres.DataSource = bdgLivresListeCmd;
+            dgvListeCmdLivres.Columns["id"].Visible = false;
+         // dgvListeCmdLivres.Columns["idlivredvd"].Visible = false;
             dgvListeCmdLivres.Columns["idsuivi"].Visible = false;
             dgvListeCmdLivres.Columns["auteur"].Visible = false;
             dgvListeCmdLivres.Columns["isbn"].Visible = false;
@@ -1344,6 +1366,34 @@ namespace Mediatek86.vue
             catch
             {
                 pcbLivresImageCmd.Image = null;
+            }
+        }
+
+        /// <summary>
+        /// Recherche et affichage des commandes du livre dont on a saisi le numéro.
+        /// Si non trouvé, affichage d'un MessageBox.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnLivresNumRechercheCmd_Click(object sender, EventArgs e)
+        {
+            if (!txbLivresNumRechercheCmd.Text.Equals(""))
+            {
+                List<CommandeDocumentLivre> documents = lesCommandesLivres.FindAll(x => x.IdLivredvd.Equals(txbLivresNumRechercheCmd.Text));
+                txbLivresNumRechercheCmd.Text = "";
+                if (documents.Any())
+                {             
+                    InitDataGridViewLivreRecherche(documents);
+                }
+                else
+                {
+                    MessageBox.Show("numéro introuvable");
+                    InitDataGridViewLivre();
+                }
+            }
+            else
+            {
+                InitDataGridViewLivre();
             }
         }
 

@@ -206,6 +206,7 @@ namespace Mediatek86.vue
             this.label82 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.grpLivresCmdAjout = new System.Windows.Forms.GroupBox();
+            this.numMontantCmdAdd = new System.Windows.Forms.NumericUpDown();
             this.label81 = new System.Windows.Forms.Label();
             this.cboLivres = new System.Windows.Forms.ComboBox();
             this.numNbExemplaireCmdAdd = new System.Windows.Forms.NumericUpDown();
@@ -250,7 +251,6 @@ namespace Mediatek86.vue
             this.txbDvdNumRechercheCmd = new System.Windows.Forms.TextBox();
             this.dgvListeCmdDvd = new System.Windows.Forms.DataGridView();
             this.tabCmdRevues = new System.Windows.Forms.TabPage();
-            this.numMontantCmdAdd = new System.Windows.Forms.NumericUpDown();
             this.tabOngletsApplication.SuspendLayout();
             this.tabLivres.SuspendLayout();
             this.grpLivresInfos.SuspendLayout();
@@ -280,6 +280,7 @@ namespace Mediatek86.vue
             this.grpLivresRechercheCmd.SuspendLayout();
             this.grpLivresCmdModif.SuspendLayout();
             this.grpLivresCmdAjout.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numMontantCmdAdd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numNbExemplaireCmdAdd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListeCmdLivres)).BeginInit();
             this.tabCmdDvd.SuspendLayout();
@@ -287,7 +288,6 @@ namespace Mediatek86.vue
             ((System.ComponentModel.ISupportInitialize)(this.pcbDvdImageCmd)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListeCmdDvd)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numMontantCmdAdd)).BeginInit();
             this.SuspendLayout();
             // 
             // tabOngletsApplication
@@ -2161,6 +2161,13 @@ namespace Mediatek86.vue
             this.grpLivresCmdAjout.TabStop = false;
             this.grpLivresCmdAjout.Text = "Ajouter une commande";
             // 
+            // numMontantCmdAdd
+            // 
+            this.numMontantCmdAdd.Location = new System.Drawing.Point(160, 39);
+            this.numMontantCmdAdd.Name = "numMontantCmdAdd";
+            this.numMontantCmdAdd.Size = new System.Drawing.Size(49, 20);
+            this.numMontantCmdAdd.TabIndex = 42;
+            // 
             // label81
             // 
             this.label81.AutoSize = true;
@@ -2292,6 +2299,7 @@ namespace Mediatek86.vue
             this.btnLivresNumRechercheCmd.TabIndex = 14;
             this.btnLivresNumRechercheCmd.Text = "Rechercher";
             this.btnLivresNumRechercheCmd.UseVisualStyleBackColor = true;
+            this.btnLivresNumRechercheCmd.Click += new System.EventHandler(this.btnLivresNumRechercheCmd_Click);
             // 
             // label57
             // 
@@ -2607,13 +2615,6 @@ namespace Mediatek86.vue
             this.tabCmdRevues.Text = "Commandes de Revues";
             this.tabCmdRevues.UseVisualStyleBackColor = true;
             // 
-            // numMontantCmdAdd
-            // 
-            this.numMontantCmdAdd.Location = new System.Drawing.Point(160, 39);
-            this.numMontantCmdAdd.Name = "numMontantCmdAdd";
-            this.numMontantCmdAdd.Size = new System.Drawing.Size(49, 20);
-            this.numMontantCmdAdd.TabIndex = 42;
-            // 
             // FrmMediatek
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2663,6 +2664,7 @@ namespace Mediatek86.vue
             this.grpLivresCmdModif.PerformLayout();
             this.grpLivresCmdAjout.ResumeLayout(false);
             this.grpLivresCmdAjout.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numMontantCmdAdd)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numNbExemplaireCmdAdd)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListeCmdLivres)).EndInit();
             this.tabCmdDvd.ResumeLayout(false);
@@ -2672,7 +2674,6 @@ namespace Mediatek86.vue
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListeCmdDvd)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numMontantCmdAdd)).EndInit();
             this.ResumeLayout(false);
 
         }
