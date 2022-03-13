@@ -236,6 +236,37 @@ namespace Mediatek86.modele
         }
 
         /// <summary>
+        /// Permet d'obtenir tout les suivis
+        /// </summary>
+        /// <returns></returns>
+        public static List<Suivi> GetAllSuivis()
+        {
+            List<Suivi> lesSuivis = null;
+            try
+            {
+                lesSuivis = new List<Suivi>();
+                string req = "SELECT * FROM `suivi` ORDER BY libelle;";
+                BddMySql curs = BddMySql.GetInstance(connectionString);
+                curs.ReqSelect(req, null);
+
+                while (curs.Read())
+                {
+                    Suivi suivi = new Suivi(
+                        (string)curs.Field("id"),
+                        (string)curs.Field("libelle")
+                        );
+                    lesSuivis.Add(suivi);
+                }
+                curs.Close();
+                return lesSuivis;
+            }
+            catch (Exception e)
+            {
+                return lesSuivis;
+            }
+        }
+
+        /// <summary>
         /// ecriture d'un exemplaire en base de données
         /// </summary>
         /// <param name="exemplaire"></param>
@@ -342,6 +373,49 @@ namespace Mediatek86.modele
             parameters.Add("@nbExemplaire", commandedocument.NbExemplaire);
             parameters.Add("@idLivreDvd", commandedocument.IdLivredvd);
             parameters.Add("@idSuivi", "00001");
+            BddMySql curs = BddMySql.GetInstance(connectionString);
+            curs.ReqUpdate(req, parameters);
+        }
+
+        /// <summary>
+        /// Demande de modification du suivi d'une commande de livre
+        /// </summary>
+        /// <param name="idCommande"></param>
+        /// <param name="idSuivi"></param>
+        public static void EditCommandeLivre(string idcommande, string idSuivi)
+        {
+            string req = "UPDATE commandedocument SET idSuivi = @idSuivi WHERE id = @idCommande";
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+                {
+                    { "@idSuivi", idSuivi },
+                    { "@idCommande", idcommande}
+                };
+            BddMySql curs = BddMySql.GetInstance(connectionString);
+            curs.ReqUpdate(req, parameters);
+        }
+
+        /// <summary>
+        /// Demande de suppression d'une comandedocument
+        /// </summary>
+        /// <param name="id"></param>
+        public static void DeleteCmdLivre(string id)
+        {
+            string req = "DELETE FROM commandedocument WHERE id = @id";
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("@id", id);
+            BddMySql curs = BddMySql.GetInstance(connectionString);
+            curs.ReqUpdate(req, parameters);
+        }
+
+        /// <summary>
+        /// Demande de suppresion d'une comande
+        /// </summary>
+        /// <param name="id"></param>
+        public static void DeleteCmd(string id)
+        {
+            string req = "DELETE FROM commande WHERE id = @id";
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("@id", id);
             BddMySql curs = BddMySql.GetInstance(connectionString);
             curs.ReqUpdate(req, parameters);
         }

@@ -15,6 +15,8 @@ namespace Mediatek86.controleur
         private readonly List<Categorie> lesPublics;
         private readonly List<Categorie> lesGenres;
         private List<CommandeDocumentLivre> lesCommandesLivres;
+        private readonly List<Suivi> lesSuivis;
+
 
         /// <summary>
         /// Ouverture de la fenêtre
@@ -27,6 +29,7 @@ namespace Mediatek86.controleur
             lesGenres = Dao.GetAllGenres();
             lesRayons = Dao.GetAllRayons();
             lesPublics = Dao.GetAllPublics();
+            lesSuivis = Dao.GetAllSuivis();
             FrmMediatek frmMediatek = new FrmMediatek(this);
             frmMediatek.ShowDialog();
         }
@@ -86,6 +89,15 @@ namespace Mediatek86.controleur
         }
 
         /// <summary>
+        /// Recupère tout les statut de la base de données
+        /// </summary>
+        /// <returns>La liste contenant tout les suivis</returns>
+        public List<Suivi> GetAllSuivis()
+        {
+            return lesSuivis;
+        }
+
+        /// <summary>
         /// récupère les exemplaires d'une revue
         /// </summary>
         /// <returns>Collection d'objets Exemplaire</returns>
@@ -130,6 +142,26 @@ namespace Mediatek86.controleur
         public void AddCommandeDocument(CommandeDocument commandedocument)
         {
             Dao.AddCommandeDocument(commandedocument);
+        }
+
+        /// <summary>
+        /// Demande de modification d'une commande de livre
+        /// </summary>
+        /// <param name="idCommande"></param>
+        /// <param name="idSuivi"></param>
+        public void EditCommandeLivre(string idCommande, string idSuivi)
+        {
+            Dao.EditCommandeLivre(idCommande, idSuivi);
+        }
+
+        /// <summary>
+        /// Demande de suppression d'une commande de livre
+        /// </summary>
+        /// <param name="id"></param>
+        public void DeleteCmdLivre(string id)
+        {
+            Dao.DeleteCmdLivre(id);
+            Dao.DeleteCmd(id);
         }
     }
 

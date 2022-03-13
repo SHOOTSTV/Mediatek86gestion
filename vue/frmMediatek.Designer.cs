@@ -200,11 +200,11 @@ namespace Mediatek86.vue
             this.label69 = new System.Windows.Forms.Label();
             this.grpLivresRechercheCmd = new System.Windows.Forms.GroupBox();
             this.grpLivresCmdModif = new System.Windows.Forms.GroupBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.cboSuivis = new System.Windows.Forms.ComboBox();
+            this.txbIdCmdEdit = new System.Windows.Forms.TextBox();
             this.label83 = new System.Windows.Forms.Label();
             this.label82 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnEditCmd = new System.Windows.Forms.Button();
             this.grpLivresCmdAjout = new System.Windows.Forms.GroupBox();
             this.numMontantCmdAdd = new System.Windows.Forms.NumericUpDown();
             this.label81 = new System.Windows.Forms.Label();
@@ -2081,11 +2081,11 @@ namespace Mediatek86.vue
             // 
             // grpLivresCmdModif
             // 
-            this.grpLivresCmdModif.Controls.Add(this.comboBox2);
-            this.grpLivresCmdModif.Controls.Add(this.textBox3);
+            this.grpLivresCmdModif.Controls.Add(this.cboSuivis);
+            this.grpLivresCmdModif.Controls.Add(this.txbIdCmdEdit);
             this.grpLivresCmdModif.Controls.Add(this.label83);
             this.grpLivresCmdModif.Controls.Add(this.label82);
-            this.grpLivresCmdModif.Controls.Add(this.button2);
+            this.grpLivresCmdModif.Controls.Add(this.btnEditCmd);
             this.grpLivresCmdModif.Enabled = false;
             this.grpLivresCmdModif.Location = new System.Drawing.Point(578, 251);
             this.grpLivresCmdModif.Name = "grpLivresCmdModif";
@@ -2094,21 +2094,21 @@ namespace Mediatek86.vue
             this.grpLivresCmdModif.TabStop = false;
             this.grpLivresCmdModif.Text = "Modifier  l\'étape de suivi d\'une commande";
             // 
-            // comboBox2
+            // cboSuivis
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(163, 46);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(102, 21);
-            this.comboBox2.TabIndex = 42;
+            this.cboSuivis.FormattingEnabled = true;
+            this.cboSuivis.Location = new System.Drawing.Point(163, 46);
+            this.cboSuivis.Name = "cboSuivis";
+            this.cboSuivis.Size = new System.Drawing.Size(102, 21);
+            this.cboSuivis.TabIndex = 42;
             // 
-            // textBox3
+            // txbIdCmdEdit
             // 
-            this.textBox3.Location = new System.Drawing.Point(190, 20);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(75, 20);
-            this.textBox3.TabIndex = 42;
+            this.txbIdCmdEdit.Location = new System.Drawing.Point(190, 20);
+            this.txbIdCmdEdit.Name = "txbIdCmdEdit";
+            this.txbIdCmdEdit.ReadOnly = true;
+            this.txbIdCmdEdit.Size = new System.Drawing.Size(75, 20);
+            this.txbIdCmdEdit.TabIndex = 42;
             // 
             // label83
             // 
@@ -2130,15 +2130,16 @@ namespace Mediatek86.vue
             this.label82.TabIndex = 42;
             this.label82.Text = "Etape de la suivi :";
             // 
-            // button2
+            // btnEditCmd
             // 
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(169, 72);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(96, 22);
-            this.button2.TabIndex = 20;
-            this.button2.Text = "Modifier";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnEditCmd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEditCmd.Location = new System.Drawing.Point(169, 72);
+            this.btnEditCmd.Name = "btnEditCmd";
+            this.btnEditCmd.Size = new System.Drawing.Size(96, 22);
+            this.btnEditCmd.TabIndex = 20;
+            this.btnEditCmd.Text = "Modifier";
+            this.btnEditCmd.UseVisualStyleBackColor = true;
+            this.btnEditCmd.Click += new System.EventHandler(this.btnEditCmd_Click);
             // 
             // grpLivresCmdAjout
             // 
@@ -2289,6 +2290,7 @@ namespace Mediatek86.vue
             this.btnLivresSupprCmd.TabIndex = 15;
             this.btnLivresSupprCmd.Text = "Supprimer";
             this.btnLivresSupprCmd.UseVisualStyleBackColor = true;
+            this.btnLivresSupprCmd.Click += new System.EventHandler(this.btnLivresSupprCmd_Click);
             // 
             // btnLivresNumRechercheCmd
             // 
@@ -2881,8 +2883,7 @@ namespace Mediatek86.vue
         private System.Windows.Forms.Label label74;
         private System.Windows.Forms.Label label75;
         private System.Windows.Forms.Label label76;
-        private System.Windows.Forms.GroupBox grpLivresCmdModif;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnEditCmd;
         private System.Windows.Forms.GroupBox grpLivresCmdAjout;
         private System.Windows.Forms.Button btnSaveCmd;
         private System.Windows.Forms.Button btnLivresAjouterCmd;
@@ -2899,9 +2900,10 @@ namespace Mediatek86.vue
         private System.Windows.Forms.Label label77;
         private System.Windows.Forms.Label label83;
         private System.Windows.Forms.Label label82;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.ComboBox cboSuivis;
+        private System.Windows.Forms.TextBox txbIdCmdEdit;
         private System.Windows.Forms.NumericUpDown numMontantCmdAdd;
+        private System.Windows.Forms.GroupBox grpLivresCmdModif;
     }
 }
 

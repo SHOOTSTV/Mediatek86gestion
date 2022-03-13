@@ -24,11 +24,16 @@ namespace Mediatek86.vue
         private readonly BindingSource bdgRevuesListe = new BindingSource();
         private readonly BindingSource bdgExemplairesListe = new BindingSource();
         private readonly BindingSource bdgLivresListeCmd = new BindingSource();
+        private readonly BindingSource bdgStatutListe = new BindingSource();
+
         private List<Livre> lesLivres = new List<Livre>();
         private List<Dvd> lesDvd = new List<Dvd>();
         private List<Revue> lesRevues = new List<Revue>();
         private List<Exemplaire> lesExemplaires = new List<Exemplaire>();
         private List<CommandeDocumentLivre> lesCommandesLivres = new List<CommandeDocumentLivre>();
+
+        private bool AddCmdLivre = false;
+        private bool EditCmdLivre = false;
 
         #endregion
 
@@ -1296,6 +1301,8 @@ namespace Mediatek86.vue
             lesCommandesLivres = controle.GetAllCommandesLivres();
             InitDataGridViewLivre();
             RemplirCbLivre();
+            RemplirCbSuivi();
+            DisableAddEditCmdLivres();
         }
 
         /// <summary>
@@ -1344,7 +1351,7 @@ namespace Mediatek86.vue
         }
 
         /// <summary>
-        /// Affichage des informations du livre sélectionné
+        /// Affichage des informations du livre qui correspond à la commande sélectionné
         /// </summary>
         /// <param name="document"></param>
         private void AfficheLivresInfosCmd(CommandeDocumentLivre document)
@@ -1370,7 +1377,18 @@ namespace Mediatek86.vue
         }
 
         /// <summary>
-        /// Recherche et affichage des commandes du livre dont on a saisi le numéro.
+        /// Permet de disable tout les groupes de saisies
+        /// </summary>
+        public void DisableAddEditCmdLivres()
+        {
+            grpLivresCmdAjout.Enabled = false;
+            grpLivresCmdModif.Enabled = false;
+            AddCmdLivre = false;
+            EditCmdLivre = false;
+        }
+
+        /// <summary>
+        /// Recherche et affichage des commandes correspondant au livre dont on a saisi le numéro.
         /// Si non trouvé, affichage d'un MessageBox.
         /// </summary>
         /// <param name="sender"></param>
@@ -1445,6 +1463,15 @@ namespace Mediatek86.vue
         }
 
         /// <summary>
+        /// vide les zones de modification d'une commande
+        /// </summary>
+        private void ViderEditCmdLivre()
+        {
+            txbIdCmdEdit.Text = "";
+            cboSuivis.SelectedIndex = 0;
+        }
+
+        /// <summary>
         /// Affiche les livres dans les combobox d'ajout d'une commande
         /// </summary>
         public void RemplirCbLivre()
@@ -1459,32 +1486,70 @@ namespace Mediatek86.vue
         }
 
         /// <summary>
-        /// Ouvre et referme l'interface pour ajouter une commande
+        /// Affiche les status dans les combobox de modification d'une commande
+        /// </summary>
+        public void RemplirCbSuivi()
+        {
+            List<Suivi> suivi = controle.GetAllSuivis();
+            bdgStatutListe.DataSource = suivi;
+            cboSuivis.DataSource = bdgStatutListe;
+            if (cboSuivis.Items.Count > 0)
+            {
+                cboSuivis.SelectedIndex = 0;
+            }
+        }
+
+        /// <summary>
+        /// Affiche les valeurs dans les combobox de modification d'une commande
+        /// </summary>
+        /// <param name="document"></param>
+        private void RemplirEditCmdLivre(CommandeDocumentLivre document)
+        {
+            txbIdCmdEdit.Text = document.Id;
+            string libelle = document.Libelle;
+            cboSuivis.SelectedIndex = cboSuivis.FindStringExact(libelle);
+
+        }
+
+        /// <summary>
+        /// Ouvre et referme l'interface d'ajout d'une commande
         /// </summary>
         private void btnLivresAjouterCmd_Click(object sender, EventArgs e)
         {
-            if (grpLivresCmdAjout.Enabled == false)
+            grpLivresCmdAjout.Enabled = true;
+            AddCmdLivre = true;
+
+            if (EditCmdLivre == true)
             {
-                grpLivresCmdAjout.Enabled = true;
+                grpLivresCmdModif.Enabled = false;
+                EditCmdLivre = false;
+                ViderEditCmdLivre();
             }
-            else
-            {
-                grpLivresCmdAjout.Enabled = false;
-            }           
         }
         /// <summary>
-        /// Ouvre et referme l'interface pour modifier le statu d'une commande
+        /// Ouvre et referme l'interface de modification du statut d'une commande
         /// </summary>
         private void btnLivresModifCmd_Click(object sender, EventArgs e)
         {
-            if (grpLivresCmdModif.Enabled == false)
+            CommandeDocumentLivre laCommande = (CommandeDocumentLivre)bdgLivresListeCmd.List[bdgLivresListeCmd.Position];
+
+            if (laCommande.Libelle == "Réglée.")
             {
-                grpLivresCmdModif.Enabled = true;
+                MessageBox.Show("Cette commande est déja réglée, impossible de retourner en arrière", "Erreur");
+                return;
             }
-            else
+
+            grpLivresCmdModif.Enabled = true;
+            EditCmdLivre = true;
+
+            if (AddCmdLivre == true)
             {
-                grpLivresCmdModif.Enabled = false;
+                grpLivresCmdAjout.Enabled = false;
+                AddCmdLivre = false;
+                VideLivreAjoutCmd();
             }
+            
+            RemplirEditCmdLivre(laCommande);
         }
 
         /// <summary>
@@ -1515,6 +1580,58 @@ namespace Mediatek86.vue
             }
         }
 
+        /// <summary>
+        /// Demande de modification du suivi d'une commande
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnEditCmd_Click(object sender, EventArgs e)
+        {
+            Suivi suivi = (Suivi)bdgStatutListe.List[bdgStatutListe.Position];
+            string suiviId = suivi.IdSuivi;
+            string suiviLibelle = suivi.Libelle;
+            CommandeDocumentLivre laCommande = (CommandeDocumentLivre)bdgLivresListeCmd.List[bdgLivresListeCmd.Position];
+            if ((laCommande.Libelle == "Réglée." || laCommande.Libelle == "Livrée.") && ((suiviLibelle == "En cours.") || (suiviLibelle == "Relancée.")))
+            {
+                MessageBox.Show("La commande est dans un stade trop avancé pour revenir a cet état", "Erreur");
+                RemplirEditCmdLivre(laCommande);
+                return;
+            }
+            if (suiviLibelle == "Réglée." && laCommande.Libelle != "Livrée.")
+            {
+                MessageBox.Show("La commande ne peut etre réglée sans être livrée avant.", "Erreur");
+                RemplirEditCmdLivre(laCommande);
+                return;
+            }
+
+            controle.EditCommandeLivre(laCommande.Id, suiviId);
+            InitDataGridViewLivre();
+            ViderEditCmdLivre();
+            grpLivresCmdModif.Enabled = false;
+        }
+
+        /// <summary>
+        /// Demande de suppression d'une commande
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnLivresSupprCmd_Click(object sender, EventArgs e)
+        {
+            CommandeDocumentLivre laCommande = (CommandeDocumentLivre)bdgLivresListeCmd.List[bdgLivresListeCmd.Position];
+            if (laCommande.Libelle == "Livrée." || laCommande.Libelle == "Réglée.")
+            {
+                MessageBox.Show("La commande est dans un stade trop avancé pour être supprimée");
+                return;
+            }
+
+            if (MessageBox.Show("Etes vous sûr?", "Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                controle.DeleteCmdLivre(laCommande.Id);
+                InitDataGridViewLivre();
+            }
+        }
+
         #endregion
+
     }
 }
