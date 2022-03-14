@@ -23,7 +23,10 @@ namespace Mediatek86.vue
         private readonly BindingSource bdgRayons = new BindingSource();
         private readonly BindingSource bdgRevuesListe = new BindingSource();
         private readonly BindingSource bdgExemplairesListe = new BindingSource();
+
         private readonly BindingSource bdgLivresListeCmd = new BindingSource();
+        private readonly BindingSource bdgDvdListeCmd = new BindingSource();
+        
         private readonly BindingSource bdgStatutListe = new BindingSource();
 
         private List<Livre> lesLivres = new List<Livre>();
@@ -31,6 +34,7 @@ namespace Mediatek86.vue
         private List<Revue> lesRevues = new List<Revue>();
         private List<Exemplaire> lesExemplaires = new List<Exemplaire>();
         private List<CommandeDocumentLivre> lesCommandesLivres = new List<CommandeDocumentLivre>();
+        private List<CommandeDocumentDvd> lesCommandesDvd = new List<CommandeDocumentDvd>();
 
         private bool AddCmdLivre = false;
         private bool EditCmdLivre = false;
@@ -1632,6 +1636,47 @@ namespace Mediatek86.vue
         }
 
         #endregion
+
+        #region Commandes de DVD
+
+        /// <summary>
+        /// Ouverture de l'onglet Commandes de DVD : 
+        /// appel des méthodes pour remplir le datagrid des commandes de livres
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tabCmdDvd_Enter(object sender, EventArgs e)
+        {
+            lesCommandesDvd = controle.GetAllCommandesDvd();
+            InitDataGridViewDvd();
+
+        }
+
+        /// <summary>
+        /// Remplit le dategrid avec la liste reçue en paramètre
+        /// </summary>
+        private void InitDataGridViewDvd()
+        {
+            List<CommandeDocumentDvd> lesDvd = controle.GetAllCommandesDvd();
+            bdgDvdListeCmd.DataSource = lesDvd;
+            dgvListeCmdDvd.DataSource = bdgDvdListeCmd;
+            dgvListeCmdDvd.Columns["id"].Visible = false;
+            // dgvListeCmdDvd.Columns["idlivredvd"].Visible = false;
+            dgvListeCmdDvd.Columns["idsuivi"].Visible = false;
+            dgvListeCmdDvd.Columns["realisateur"].Visible = false;
+            dgvListeCmdDvd.Columns["synopsis"].Visible = false;
+            dgvListeCmdDvd.Columns["id"].Visible = false;
+            dgvListeCmdDvd.Columns["duree"].Visible = false;
+            dgvListeCmdDvd.Columns["genre"].Visible = false;
+            dgvListeCmdDvd.Columns["rayon"].Visible = false;
+            dgvListeCmdDvd.Columns["typepublic"].Visible = false;
+            dgvListeCmdDvd.Columns["titre"].Visible = false;
+            dgvListeCmdDvd.Columns["image"].Visible = false;
+            dgvListeCmdDvd.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+        }
+
+        #endregion
+
 
     }
 }

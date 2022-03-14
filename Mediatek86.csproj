@@ -97,6 +97,7 @@
     </Compile>
     <Compile Include="metier\CommandeDocument.cs" />
     <Compile Include="metier\Commande.cs" />
+    <Compile Include="metier\CommandeDocumentDvd.cs" />
     <Compile Include="metier\CommandeDocumentLivre.cs" />
     <Compile Include="metier\Dvd.cs" />
     <Compile Include="metier\Etat.cs" />

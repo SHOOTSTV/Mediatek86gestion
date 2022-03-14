@@ -260,7 +260,7 @@ namespace Mediatek86.modele
                 curs.Close();
                 return lesSuivis;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return lesSuivis;
             }
@@ -380,7 +380,7 @@ namespace Mediatek86.modele
         /// <summary>
         /// Demande de modification du suivi d'une commande de livre
         /// </summary>
-        /// <param name="idCommande"></param>
+        /// <param name="idcommande"></param>
         /// <param name="idSuivi"></param>
         public static void EditCommandeLivre(string idcommande, string idSuivi)
         {
@@ -395,7 +395,7 @@ namespace Mediatek86.modele
         }
 
         /// <summary>
-        /// Demande de suppression d'une comandedocument
+        /// Demande de suppression d'une commandedocument
         /// </summary>
         /// <param name="id"></param>
         public static void DeleteCmdLivre(string id)
@@ -408,7 +408,7 @@ namespace Mediatek86.modele
         }
 
         /// <summary>
-        /// Demande de suppresion d'une comande
+        /// Demande de suppresion d'une commande
         /// </summary>
         /// <param name="id"></param>
         public static void DeleteCmd(string id)
@@ -420,5 +420,55 @@ namespace Mediatek86.modele
             curs.ReqUpdate(req, parameters);
         }
 
+        /// <summary>
+        /// Retourne toutes les Dvd de livres à partir de la BDD
+        /// </summary>
+        /// <returns>Liste d'objets Commandes</returns>
+        public static List<CommandeDocumentDvd> GetAllCommandesDvd()
+        {
+            List<CommandeDocumentDvd> lesCommandesDvd = null;
+            try
+            {
+                lesCommandesDvd = new List<CommandeDocumentDvd>();
+                string req = "SELECT c.id as id_commande, c.dateCommande as dateCommande, c.montant as montant, cd.nbExemplaire as nbExemplaire, cd.idLivreDvd as idLivre, s.id as id_etat, s.libelle as libelle, dvd.synopsis as synopsis, dvd.realisateur as realisateur, dvd.duree as duree, d.titre as titre, g.libelle as genre, p.libelle as public, r.libelle as rayon ";
+                req += "FROM `commande`c LEFT JOIN `commandedocument` cd USING(id) ";
+                req += "LEFT JOIN `suivi` s ON s.id = cd.idSuivi ";
+                req += "LEFT JOIN `dvd` dvd ON dvd.id = cd.idLivreDvd ";
+                req += "LEFT JOIN `document` d ON d.id = cd.idLivreDvd ";
+                req += "JOIN rayon r on r.id=d.idRayon ";
+                req += "JOIN genre g on g.id=d.idGenre ";
+                req += "JOIN public p on p.id=d.idPublic ORDER BY c.dateCommande DESC";
+                BddMySql curs = BddMySql.GetInstance(connectionString);
+                curs.ReqSelect(req, null);
+
+                while (curs.Read())
+                {
+                    CommandeDocumentDvd commandeDocumentDvd = new CommandeDocumentDvd(
+                        (string)curs.Field("id_commande"),
+                        (DateTime)curs.Field("dateCommande"),
+                        (double)curs.Field("montant"),
+                        (int)curs.Field("nbExemplaire"),
+                        (string)curs.Field("idLivre"),
+                        (string)curs.Field("id_etat"),
+                        (string)curs.Field("libelle"),
+                        (string)curs.Field("synopsis"),
+                        (string)curs.Field("realisateur"),
+                        (int)curs.Field("duree"),
+                        (string)curs.Field("titre"),
+                        (string)curs.Field("genre"),
+                        (string)curs.Field("public"),
+                        (string)curs.Field("rayon"),
+                        (string)curs.Field("image")
+                        );
+                    lesCommandesDvd.Add(commandeDocumentDvd);
+                }
+                curs.Close();
+                return lesCommandesDvd;
+            }
+            catch (Exception)
+            {
+                return lesCommandesDvd;
+            }
+        }
     }
 }

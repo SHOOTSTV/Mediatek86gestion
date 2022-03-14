@@ -306,7 +306,6 @@ namespace Mediatek86.vue
             this.tabOngletsApplication.SelectedIndex = 0;
             this.tabOngletsApplication.Size = new System.Drawing.Size(883, 659);
             this.tabOngletsApplication.TabIndex = 0;
-            this.tabOngletsApplication.Enter += new System.EventHandler(this.tabCmdLivres_Enter);
             // 
             // tabLivres
             // 
@@ -1861,6 +1860,7 @@ namespace Mediatek86.vue
             this.tabCmdLivres.TabIndex = 5;
             this.tabCmdLivres.Text = "Commandes de Livres";
             this.tabCmdLivres.UseVisualStyleBackColor = true;
+            this.tabCmdLivres.Enter += new System.EventHandler(this.tabCmdLivres_Enter);
             // 
             // grpLivresInfosCmd
             // 
@@ -2137,7 +2137,7 @@ namespace Mediatek86.vue
             this.btnEditCmd.Name = "btnEditCmd";
             this.btnEditCmd.Size = new System.Drawing.Size(96, 22);
             this.btnEditCmd.TabIndex = 20;
-            this.btnEditCmd.Text = "Modifier";
+            this.btnEditCmd.Text = "Valider";
             this.btnEditCmd.UseVisualStyleBackColor = true;
             this.btnEditCmd.Click += new System.EventHandler(this.btnEditCmd_Click);
             // 
@@ -2255,7 +2255,7 @@ namespace Mediatek86.vue
             this.btnSaveCmd.Name = "btnSaveCmd";
             this.btnSaveCmd.Size = new System.Drawing.Size(96, 22);
             this.btnSaveCmd.TabIndex = 20;
-            this.btnSaveCmd.Text = "Ajouter";
+            this.btnSaveCmd.Text = "Valider";
             this.btnSaveCmd.UseVisualStyleBackColor = true;
             this.btnSaveCmd.Click += new System.EventHandler(this.btnSaveCmd_Click);
             // 
@@ -2348,6 +2348,7 @@ namespace Mediatek86.vue
             this.tabCmdDvd.TabIndex = 6;
             this.tabCmdDvd.Text = "Commandes de DVD";
             this.tabCmdDvd.UseVisualStyleBackColor = true;
+            this.tabCmdDvd.Enter += new System.EventHandler(this.tabCmdDvd_Enter);
             // 
             // groupBox2
             // 

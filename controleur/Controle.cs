@@ -15,6 +15,7 @@ namespace Mediatek86.controleur
         private readonly List<Categorie> lesPublics;
         private readonly List<Categorie> lesGenres;
         private List<CommandeDocumentLivre> lesCommandesLivres;
+        private List<CommandeDocumentDvd> lesCommandesDvd;
         private readonly List<Suivi> lesSuivis;
 
 
@@ -162,6 +163,16 @@ namespace Mediatek86.controleur
         {
             Dao.DeleteCmdLivre(id);
             Dao.DeleteCmd(id);
+        }
+
+        /// <summary>
+        /// getter sur la liste des commandes de dvd
+        /// </summary>
+        /// <returns>Collection d'objets Commandes</returns>
+        public List<CommandeDocumentDvd> GetAllCommandesDvd()
+        {
+            lesCommandesDvd = Dao.GetAllCommandesDvd();
+            return lesCommandesDvd;
         }
     }
 
