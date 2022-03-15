@@ -303,7 +303,7 @@ namespace Mediatek86.modele
             try
             {
                 lesCommandesLivres = new List<CommandeDocumentLivre>();
-                string req = "SELECT c.id as id_commande, c.dateCommande as dateCommande, c.montant as montant, cd.nbExemplaire as nbExemplaire, cd.idLivreDvd as idLivre, s.id as id_etat, s.libelle as libelle, l.isbn as isbn, l.auteur as auteur, l.collection as collection, d.titre as titre, g.libelle as genre, p.libelle as public, r.libelle as rayon, d.image as image";
+                string req = "SELECT c.id as id_commande, c.dateCommande as dateCommande, c.montant as montant, cd.nbExemplaire as nbExemplaire, cd.idLivreDvd as idLivre, s.id as id_etat, s.libelle as libelle, l.isbn as isbn, l.auteur as auteur, l.collection as collection, d.titre as titre, g.libelle as genre, p.libelle as public, r.libelle as rayon, d.image as image ";
                 req += "FROM `commande`c LEFT JOIN `commandedocument` cd USING(id) ";
                 req += "LEFT JOIN `suivi` s ON s.id = cd.idSuivi ";
                 req += "LEFT JOIN `livre` l ON l.id = cd.idLivreDvd ";
@@ -383,7 +383,7 @@ namespace Mediatek86.modele
         /// </summary>
         /// <param name="idcommande"></param>
         /// <param name="idSuivi"></param>
-        public static void EditCommandeLivre(string idcommande, string idSuivi)
+        public static void EditCommande(string idcommande, string idSuivi)
         {
             string req = "UPDATE commandedocument SET idSuivi = @idSuivi WHERE id = @idCommande";
             Dictionary<string, object> parameters = new Dictionary<string, object>
@@ -399,7 +399,7 @@ namespace Mediatek86.modele
         /// Demande de suppression d'une commandedocument
         /// </summary>
         /// <param name="id"></param>
-        public static void DeleteCmdLivre(string id)
+        public static void DeleteCmdDoc(string id)
         {
             string req = "DELETE FROM commandedocument WHERE id = @id";
             Dictionary<string, object> parameters = new Dictionary<string, object>();

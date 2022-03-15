@@ -150,18 +150,18 @@ namespace Mediatek86.controleur
         /// </summary>
         /// <param name="idCommande"></param>
         /// <param name="idSuivi"></param>
-        public void EditCommandeLivre(string idCommande, string idSuivi)
+        public void EditCommande(string idCommande, string idSuivi)
         {
-            Dao.EditCommandeLivre(idCommande, idSuivi);
+            Dao.EditCommande(idCommande, idSuivi);
         }
 
         /// <summary>
         /// Demande de suppression d'une commande de livre
         /// </summary>
         /// <param name="id"></param>
-        public void DeleteCmdLivre(string id)
+        public void DeleteCmd(string id)
         {
-            Dao.DeleteCmdLivre(id);
+            Dao.DeleteCmdDoc(id);
             Dao.DeleteCmd(id);
         }
 
