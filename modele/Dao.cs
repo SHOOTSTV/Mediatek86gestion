@@ -303,14 +303,15 @@ namespace Mediatek86.modele
             try
             {
                 lesCommandesLivres = new List<CommandeDocumentLivre>();
-                string req = "SELECT c.id as id_commande, c.dateCommande as dateCommande, c.montant as montant, cd.nbExemplaire as nbExemplaire, cd.idLivreDvd as idLivre, s.id as id_etat, s.libelle as libelle, l.isbn as isbn, l.auteur as auteur, l.collection as collection, d.titre as titre, g.libelle as genre, p.libelle as public, r.libelle as rayon ";
+                string req = "SELECT c.id as id_commande, c.dateCommande as dateCommande, c.montant as montant, cd.nbExemplaire as nbExemplaire, cd.idLivreDvd as idLivre, s.id as id_etat, s.libelle as libelle, l.isbn as isbn, l.auteur as auteur, l.collection as collection, d.titre as titre, g.libelle as genre, p.libelle as public, r.libelle as rayon, d.image as image";
                 req += "FROM `commande`c LEFT JOIN `commandedocument` cd USING(id) ";
                 req += "LEFT JOIN `suivi` s ON s.id = cd.idSuivi ";
                 req += "LEFT JOIN `livre` l ON l.id = cd.idLivreDvd ";
                 req += "LEFT JOIN `document` d ON d.id = cd.idLivreDvd ";
                 req += "JOIN rayon r on r.id=d.idRayon ";
                 req += "JOIN genre g on g.id=d.idGenre ";
-                req += "JOIN public p on p.id=d.idPublic ORDER BY c.dateCommande DESC";                
+                req += "JOIN public p on p.id=d.idPublic ";
+                req += "WHERE cd.idLivreDvd = l.id ORDER BY c.dateCommande DESC";                
                 BddMySql curs = BddMySql.GetInstance(connectionString);
                 curs.ReqSelect(req, null);
 
@@ -430,14 +431,15 @@ namespace Mediatek86.modele
             try
             {
                 lesCommandesDvd = new List<CommandeDocumentDvd>();
-                string req = "SELECT c.id as id_commande, c.dateCommande as dateCommande, c.montant as montant, cd.nbExemplaire as nbExemplaire, cd.idLivreDvd as idLivre, s.id as id_etat, s.libelle as libelle, dvd.synopsis as synopsis, dvd.realisateur as realisateur, dvd.duree as duree, d.titre as titre, g.libelle as genre, p.libelle as public, r.libelle as rayon ";
+                string req = "SELECT c.id as id_commande, c.dateCommande as dateCommande, c.montant as montant, cd.nbExemplaire as nbExemplaire, cd.idLivreDvd as idLivre, s.id as id_etat, s.libelle as libelle, dvd.synopsis as synopsis, dvd.realisateur as realisateur, dvd.duree as duree, d.titre as titre, g.libelle as genre, p.libelle as public, r.libelle as rayon, d.image as image ";
                 req += "FROM `commande`c LEFT JOIN `commandedocument` cd USING(id) ";
                 req += "LEFT JOIN `suivi` s ON s.id = cd.idSuivi ";
                 req += "LEFT JOIN `dvd` dvd ON dvd.id = cd.idLivreDvd ";
                 req += "LEFT JOIN `document` d ON d.id = cd.idLivreDvd ";
                 req += "JOIN rayon r on r.id=d.idRayon ";
                 req += "JOIN genre g on g.id=d.idGenre ";
-                req += "JOIN public p on p.id=d.idPublic ORDER BY c.dateCommande DESC";
+                req += "JOIN public p on p.id=d.idPublic ";
+                req += "WHERE cd.idLivreDvd = dvd.id ORDER BY c.dateCommande DESC";
                 BddMySql curs = BddMySql.GetInstance(connectionString);
                 curs.ReqSelect(req, null);
 
