@@ -1588,6 +1588,17 @@ namespace Mediatek86.vue
         }
 
         /// <summary>
+        /// Permet l'annulation de l'ajout d'une commande de livres
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSaveCmdAnnuler_Click(object sender, EventArgs e)
+        {
+            VideLivreAjoutCmd();
+            grpLivresCmdAjout.Enabled = false;
+        }
+
+        /// <summary>
         /// Demande de modification du suivi d'une commande
         /// </summary>
         /// <param name="sender"></param>
@@ -1618,7 +1629,18 @@ namespace Mediatek86.vue
         }
 
         /// <summary>
-        /// Demande de suppression d'une commande
+        /// Permet l'annulation de la modification d'une commande de livres
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnEditCmdAnnuler_Click(object sender, EventArgs e)
+        {
+            ViderEditCmdLivre();
+            grpLivresCmdModif.Enabled = false;
+        }
+
+        /// <summary>
+        /// Demande de suppression d'une commande de livres
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1938,6 +1960,17 @@ namespace Mediatek86.vue
         }
 
         /// <summary>
+        /// Permet l'annulation de l'ajout d'une commande de dvd
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSaveCmdDvdAnnuler_Click(object sender, EventArgs e)
+        {
+            VideDvdAjoutCmd();
+            grpDvdCmdAjout.Enabled = false;
+        }
+
+        /// <summary>
         /// Demande de modification du suivi d'une commande
         /// </summary>
         /// <param name="sender"></param>
@@ -1963,6 +1996,17 @@ namespace Mediatek86.vue
 
             controle.EditCommande(laCommande.Id, suiviId);
             InitDataGridViewDvd();
+            ViderDvdCmdEdit();
+            grpDvdCmdModif.Enabled = false;
+        }
+
+        /// <summary>
+        /// Permet l'annulation de la modification d'une commande de livres
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnEditCmdDvdAnnuler_Click(object sender, EventArgs e)
+        {
             ViderDvdCmdEdit();
             grpDvdCmdModif.Enabled = false;
         }
