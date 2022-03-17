@@ -64,8 +64,6 @@ namespace Mediatek86.metier
         public string Typepublic { get => typepublic; }
         public string Rayon { get => rayon; }
         public string Image { get => image; }
-
-
     }
 }
 

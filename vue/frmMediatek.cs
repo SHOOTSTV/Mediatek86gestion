@@ -26,7 +26,8 @@ namespace Mediatek86.vue
 
         private readonly BindingSource bdgLivresListeCmd = new BindingSource();
         private readonly BindingSource bdgDvdListeCmd = new BindingSource();
-        
+        private readonly BindingSource bdgRevueListeCmd = new BindingSource();
+
         private readonly BindingSource bdgStatutListe = new BindingSource();
 
         private List<Livre> lesLivres = new List<Livre>();
@@ -35,6 +36,7 @@ namespace Mediatek86.vue
         private List<Exemplaire> lesExemplaires = new List<Exemplaire>();
         private List<CommandeDocumentLivre> lesCommandesLivres = new List<CommandeDocumentLivre>();
         private List<CommandeDocumentDvd> lesCommandesDvd = new List<CommandeDocumentDvd>();
+        private List<CommandeRevue> lesCommandesRevues = new List<CommandeRevue>();
 
         private bool AddCmdLivre = false;
         private bool EditCmdLivre = false;
@@ -1319,12 +1321,11 @@ namespace Mediatek86.vue
             List<CommandeDocumentLivre> documents = controle.GetAllCommandesLivres();
             bdgLivresListeCmd.DataSource = documents;
             dgvListeCmdLivres.DataSource = bdgLivresListeCmd;
-            dgvListeCmdLivres.Columns["id"].Visible = false;
-         // dgvListeCmdLivres.Columns["idlivredvd"].Visible = false;
+            // dgvListeCmdLivres.Columns["id"].Visible = false;
+            dgvListeCmdLivres.Columns["idlivredvd"].Visible = false;
             dgvListeCmdLivres.Columns["idsuivi"].Visible = false;
             dgvListeCmdLivres.Columns["auteur"].Visible = false;
             dgvListeCmdLivres.Columns["isbn"].Visible = false;
-            dgvListeCmdLivres.Columns["id"].Visible = false;
             dgvListeCmdLivres.Columns["collection"].Visible = false;
             dgvListeCmdLivres.Columns["genre"].Visible = false;
             dgvListeCmdLivres.Columns["rayon"].Visible = false;
@@ -1341,12 +1342,11 @@ namespace Mediatek86.vue
         {
             bdgLivresListeCmd.DataSource = documents;
             dgvListeCmdLivres.DataSource = bdgLivresListeCmd;
-            dgvListeCmdLivres.Columns["id"].Visible = false;
-         // dgvListeCmdLivres.Columns["idlivredvd"].Visible = false;
+            // dgvListeCmdLivres.Columns["id"].Visible = false;
+            dgvListeCmdLivres.Columns["idlivredvd"].Visible = false;
             dgvListeCmdLivres.Columns["idsuivi"].Visible = false;
             dgvListeCmdLivres.Columns["auteur"].Visible = false;
             dgvListeCmdLivres.Columns["isbn"].Visible = false;
-            dgvListeCmdLivres.Columns["id"].Visible = false;
             dgvListeCmdLivres.Columns["collection"].Visible = false;
             dgvListeCmdLivres.Columns["genre"].Visible = false;
             dgvListeCmdLivres.Columns["rayon"].Visible = false;
@@ -1366,7 +1366,7 @@ namespace Mediatek86.vue
             txbLivresCollectionCmd.Text = document.Collection;
             txbLivresImageCmd.Text = document.Image;
             txbLivresIsbnCmd.Text = document.Isbn;
-            txbLivresNumeroCmd.Text = document.Id;
+            txbLivresNumeroCmd.Text = document.IdLivredvd;
             txbLivresGenreCmd.Text = document.Genre;
             txbLivresPublicCmd.Text = document.Typepublic;
             txbLivresRayonCmd.Text = document.Rayon;
@@ -1464,8 +1464,6 @@ namespace Mediatek86.vue
             txbIdCmdAdd.Text = "";
             numMontantCmdAdd.Value = 0;
             numNbExemplaireCmdAdd.Value = 0;
-
-
         }
 
         /// <summary>
@@ -1680,7 +1678,6 @@ namespace Mediatek86.vue
             RemplirCbDvd();
             RemplirCbSuiviDvd();
             DisableAddEditCmdDvd();
-
         }
 
         /// <summary>
@@ -1691,12 +1688,11 @@ namespace Mediatek86.vue
             List<CommandeDocumentDvd> lesDvd = controle.GetAllCommandesDvd();
             bdgDvdListeCmd.DataSource = lesDvd;
             dgvListeCmdDvd.DataSource = bdgDvdListeCmd;
-            dgvListeCmdDvd.Columns["id"].Visible = false;
-            // dgvListeCmdDvd.Columns["idlivredvd"].Visible = false;
+            // dgvListeCmdDvd.Columns["id"].Visible = false;
+            dgvListeCmdDvd.Columns["idlivredvd"].Visible = false;
             dgvListeCmdDvd.Columns["idsuivi"].Visible = false;
             dgvListeCmdDvd.Columns["realisateur"].Visible = false;
             dgvListeCmdDvd.Columns["synopsis"].Visible = false;
-            dgvListeCmdDvd.Columns["id"].Visible = false;
             dgvListeCmdDvd.Columns["duree"].Visible = false;
             dgvListeCmdDvd.Columns["genre"].Visible = false;
             dgvListeCmdDvd.Columns["rayon"].Visible = false;
@@ -1713,12 +1709,11 @@ namespace Mediatek86.vue
         {
             bdgDvdListeCmd.DataSource = lesDvd;
             dgvListeCmdDvd.DataSource = bdgDvdListeCmd;
-            dgvListeCmdDvd.Columns["id"].Visible = false;
-            // dgvListeCmdDvd.Columns["idlivredvd"].Visible = false;
+            // dgvListeCmdDvd.Columns["id"].Visible = false;
+            dgvListeCmdDvd.Columns["idlivredvd"].Visible = false;
             dgvListeCmdDvd.Columns["idsuivi"].Visible = false;
             dgvListeCmdDvd.Columns["realisateur"].Visible = false;
             dgvListeCmdDvd.Columns["synopsis"].Visible = false;
-            dgvListeCmdDvd.Columns["id"].Visible = false;
             dgvListeCmdDvd.Columns["duree"].Visible = false;
             dgvListeCmdDvd.Columns["genre"].Visible = false;
             dgvListeCmdDvd.Columns["rayon"].Visible = false;
@@ -1734,7 +1729,7 @@ namespace Mediatek86.vue
         /// <param name="lesDvd"></param>
         private void AfficheDvdInfosCmd(CommandeDocumentDvd lesDvd)
         {
-            txbDvdNumeroCmd.Text = lesDvd.Id;
+            txbDvdNumeroCmd.Text = lesDvd.IdLivredvd;
             txbDvdDureeCmd.Text = lesDvd.Duree.ToString();
             txbDvdTitreCmd.Text = lesDvd.Titre;
             txbDvdRealisateurCmd.Text = lesDvd.Realisateur;
@@ -1836,8 +1831,6 @@ namespace Mediatek86.vue
             txbIdCmdAddDvd.Text = "";
             numMontantCmdAddDvd.Value = 0;
             numNbExemplaireCmdAddDvd.Value = 0;
-
-
         }
 
         /// <summary>
@@ -2033,5 +2026,256 @@ namespace Mediatek86.vue
         }
 
         #endregion
+
+        #region Commandes de revues
+        //-----------------------------------------------------------
+        // ONGLET "COMMANDES DE REVUES"
+        //-----------------------------------------------------------
+
+        /// <summary>
+        /// Ouverture de l'onglet Commandes de Revues : 
+        /// appel des méthodes pour remplir le datagrid des commandes de revues
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tabCmdRevues_Enter(object sender, EventArgs e)
+        {
+            lesCommandesRevues = controle.GetAllCommandesRevues();
+            InitDataGridViewRevue();
+            RemplirCbRevue();
+            DisableAddCmdRevue();
+        }
+
+        /// <summary>
+        /// Remplit le dategrid avec la liste reçue en paramètre
+        /// </summary>
+        private void InitDataGridViewRevue()
+        {
+            List<CommandeRevue> revues = controle.GetAllCommandesRevues();
+            bdgRevueListeCmd.DataSource = revues;
+            dgvListeCmdRevue.DataSource = bdgRevueListeCmd;
+            dgvListeCmdRevue.Columns["id"].Visible = false;
+            // dgvListeCmdRevue.Columns["idrevue"].Visible = false;
+            dgvListeCmdRevue.Columns["delaiMiseADispo"].Visible = false;
+            dgvListeCmdRevue.Columns["periodicite"].Visible = false;
+            dgvListeCmdRevue.Columns["genre"].Visible = false;
+            dgvListeCmdRevue.Columns["rayon"].Visible = false;
+            dgvListeCmdRevue.Columns["typepublic"].Visible = false;
+            dgvListeCmdRevue.Columns["titre"].Visible = false;
+            dgvListeCmdRevue.Columns["image"].Visible = false;
+            dgvListeCmdRevue.Columns["empruntable"].Visible = false;
+            dgvListeCmdRevue.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+        }
+
+        /// <summary>
+        /// Remplit le dategrid avec l'id d'un livre reçue en paramètre
+        /// </summary>
+        private void InitDataGridViewRevueRecherche(List<CommandeRevue> revues)
+        {
+            bdgRevueListeCmd.DataSource = revues;
+            dgvListeCmdRevue.DataSource = bdgRevueListeCmd;
+            dgvListeCmdRevue.Columns["id"].Visible = false;
+           // dgvListeCmdRevue.Columns["idrevue"].Visible = false;
+            dgvListeCmdRevue.Columns["delaiMiseADispo"].Visible = false;
+            dgvListeCmdRevue.Columns["periodicite"].Visible = false;
+            dgvListeCmdRevue.Columns["genre"].Visible = false;
+            dgvListeCmdRevue.Columns["rayon"].Visible = false;
+            dgvListeCmdRevue.Columns["typepublic"].Visible = false;
+            dgvListeCmdRevue.Columns["titre"].Visible = false;
+            dgvListeCmdRevue.Columns["image"].Visible = false;
+            dgvListeCmdRevue.Columns["empruntable"].Visible = false;
+            dgvListeCmdRevue.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+        }
+
+        /// <summary>
+        /// Affichage des informations de la revue qui correspond à la commande sélectionné
+        /// </summary>
+        /// <param name="revue"></param>
+        private void AfficheRevuesInfosCmd(CommandeRevue revue)
+        {
+            txbRevueNumeroCmd.Text = revue.IdRevue;
+            chBxEmprunt.Checked = revue.Empruntable;
+            txbRevueTitreCmd.Text = revue.Titre;
+            txbRevuePeriodCmd.Text = revue.Periodicite;
+            txbRevueDelaiCmd.Text = revue.DelaiMiseADispo.ToString();
+            txbRevueGenreCmd.Text = revue.Genre;
+            txbRevuePublicCmd.Text = revue.Typepublic;
+            txbRevueRayonCmd.Text = revue.Rayon;
+            txbRevueImageCmd.Text = revue.Image;
+            string image = revue.Image;
+            try
+            {
+                pcbRevueImageCmd.Image = Image.FromFile(image);
+            }
+            catch
+            {
+                pcbRevueImageCmd.Image = null;
+            }
+        }
+
+        /// <summary>
+        /// Recherche et affichage des commandes correspondant au livre dont on a saisi le numéro.
+        /// Si non trouvé, affichage d'un MessageBox.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnRevueNumRechercheCmd_Click(object sender, EventArgs e)
+        {
+            if (!txbRevueNumRechercheCmd.Text.Equals(""))
+            {
+                List<CommandeRevue> lesRevues = lesCommandesRevues.FindAll(x => x.IdRevue.Equals(txbRevueNumRechercheCmd.Text));
+                txbRevueNumRechercheCmd.Text = "";
+                if (lesRevues.Any())
+                {
+                    InitDataGridViewRevueRecherche(lesRevues);
+                }
+                else
+                {
+                    MessageBox.Show("numéro introuvable");
+                    InitDataGridViewRevue();
+                }
+            }
+            else
+            {
+                InitDataGridViewRevue();
+            }
+        }
+
+        /// <summary>
+        /// Sur la sélection d'une ligne ou cellule dans le grid
+        /// affichage des informations de la revue
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgvListeCmdRevue_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvListeCmdRevue.CurrentCell != null)
+            {
+                try
+                {
+                    CommandeRevue lesRevues = (CommandeRevue)bdgRevueListeCmd.List[bdgRevueListeCmd.Position];
+                    AfficheRevuesInfosCmd(lesRevues);
+                }
+                catch
+                {
+                    VideRevueZonesCmd();
+                }
+            }
+            else
+            {
+                VideRevueZonesCmd();
+            }
+        }
+
+        /// <summary>
+        /// Permet de disable tout les groupes de saisies
+        /// </summary>
+        public void DisableAddCmdRevue()
+        {
+            grpRevueCmdAjout.Enabled = false;
+        }
+
+        /// <summary>
+        /// vide les zones de recherche et de filtre
+        /// </summary>
+        private void VideRevueZonesCmd()
+        {
+            txbRevueNumRechercheCmd.Text = "";
+        }
+
+        /// <summary>
+        /// vide les zones de saisie d'une commande
+        /// </summary>
+        private void VideRevueAjoutCmd()
+        {
+            txbIdCmdAddRevue.Text = "";
+            numMontantCmdAddRevue.Value = 0;
+        }
+
+        /// <summary>
+        /// Affiche les revues dans les combobox d'ajout d'une commande
+        /// </summary>
+        public void RemplirCbRevue()
+        {
+            List<Revue> revue = controle.GetAllRevues();
+            bdgRevuesListe.DataSource = revue;
+            cboRevue.DataSource = bdgRevuesListe;
+            if (cboRevue.Items.Count > 0)
+            {
+                cboRevue.SelectedIndex = 0;
+            }
+        }
+
+        /// <summary>
+        /// Ouvre et referme l'interface d'ajout d'une commande de revue
+        /// </summary>
+        private void btnRevueAjouterCmd_Click(object sender, EventArgs e)
+        {
+            grpRevueCmdAjout.Enabled = true;
+        }
+
+        /// <summary>
+        /// Demande d'ajout d'une commande de revue
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSaveCmdRevue_Click(object sender, EventArgs e)
+        {
+
+            if (dtpDateCmdAddRevue.Value >= dtpDateFinCmdAddRevue.Value)
+            {
+                MessageBox.Show("La date de début de début d'un abonnement ne peut pas être supérieur à la date de fin de celui-ci.", "Erreur");
+                return;
+            }
+            if (!txbIdCmdAddRevue.Text.Equals("") && numMontantCmdAddRevue.Value > 0 && MessageBox.Show("Etes vous sûr?", "Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                int Montant = (int)numMontantCmdAddRevue.Value;
+
+                Commande commande = new Commande(txbIdCmdAddRevue.Text, dtpDateCmdAddRevue.Value, Montant);
+                Abonnement abonnement = new Abonnement(txbIdCmdAddRevue.Text, dtpDateFinCmdAddRevue.Value, ((CommandeRevue)bdgRevueListeCmd.List[bdgRevueListeCmd.Position]).IdRevue);
+
+                controle.AddCommande(commande);
+                controle.AddAbonnementRevue(abonnement);
+
+                InitDataGridViewRevue();
+                VideRevueAjoutCmd();
+                grpRevueCmdAjout.Enabled = false;
+            }
+            else
+            {
+                MessageBox.Show("Tous les champs doivent être remplis correctement.", "Information");
+            }
+        }
+
+        /// <summary>
+        /// Permet l'annulation de l'ajout d'une commande de revue
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSaveCmdRevueAnnuler_Click(object sender, EventArgs e)
+        {
+            VideRevueAjoutCmd();
+            grpRevueCmdAjout.Enabled = false;
+        }
+
+        /// <summary>
+        /// Demande de suppression d'une commande
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnRevueSupprCmd_Click(object sender, EventArgs e)
+        {
+            CommandeRevue abonnement = (CommandeRevue)bdgRevueListeCmd.List[bdgRevueListeCmd.Position];
+            DialogResult dialogResult = MessageBox.Show($"Êtes vous sur(e) de vouloir supprimer l'abonnement ayant pour id : {abonnement.Id}");
+  
+            if (MessageBox.Show("Etes vous sûr?", "Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                controle.DeleteAbonnement(abonnement.Id);
+                InitDataGridViewRevue();
+            }
+        }
+
+        #endregion
+
     }
 }

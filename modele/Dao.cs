@@ -422,7 +422,7 @@ namespace Mediatek86.modele
         }
 
         /// <summary>
-        /// Retourne toutes les Dvd de livres à partir de la BDD
+        /// Retourne toutes les commandes de Dvd à partir de la BDD
         /// </summary>
         /// <returns>Liste d'objets Commandes</returns>
         public static List<CommandeDocumentDvd> GetAllCommandesDvd()
@@ -471,6 +471,97 @@ namespace Mediatek86.modele
             {
                 return lesCommandesDvd;
             }
+        }
+
+        /// <summary>
+        /// Retourne toutes commandes de revues à partir de la BDD
+        /// </summary>
+        /// <returns>Liste d'objets Commandes</returns>
+        public static List<CommandeRevue> GetAllCommandesRevues()
+        {
+            List<CommandeRevue> lesCommandesRevues = null;
+            try
+            {
+                lesCommandesRevues = new List<CommandeRevue>();
+                string req = "SELECT c.id, c.dateCommande, a.dateFinAbonnement, a.idRevue, re.empruntable, d.titre, re.periodicite, re.delaiMiseADispo as delaidispo, g.libelle as genre, p.libelle as public, r.libelle as rayon, d.image, c.montant ";
+                req += "FROM commande c ";
+                req += "LEFT JOIN abonnement a USING(id) ";
+                req += "LEFT JOIN revue re ON a.idRevue = re.id ";
+                req += "LEFT JOIN document d ON a.idRevue = d.id ";
+                req += "JOIN genre g ON d.idGenre = g.id ";
+                req += "JOIN public p ON d.idPublic = p.id ";
+                req += "JOIN rayon r ON d.idRayon = r.id ";
+                req += "WHERE a.idRevue = re.id ";
+                req += "ORDER BY c.dateCommande DESC";
+                BddMySql curs = BddMySql.GetInstance(connectionString);
+                curs.ReqSelect(req, null);
+
+                while (curs.Read())
+                {
+                    CommandeRevue commandeRevue = new CommandeRevue(
+                        (string)curs.Field("id"),
+                        (DateTime)curs.Field("dateCommande"),
+                        (double)curs.Field("montant"),
+                        (DateTime)curs.Field("dateFinAbonnement"),
+                        (string)curs.Field("idRevue"),                    
+                        (bool)curs.Field("empruntable"),
+                        (string)curs.Field("periodicite"),
+                        (int)curs.Field("delaidispo"),
+                        (string)curs.Field("titre"),
+                        (string)curs.Field("genre"),
+                        (string)curs.Field("public"),
+                        (string)curs.Field("rayon"),
+                        (string)curs.Field("image")
+                        );
+                    lesCommandesRevues.Add(commandeRevue);
+                }
+                curs.Close();
+                return lesCommandesRevues;
+            }
+            catch (Exception)
+            {
+                return lesCommandesRevues;
+            }
+        }
+
+        /// <summary>
+        /// Ajoute une ligne à la table abonnement.
+        /// </summary>
+        /// <param name="abonnement">Abonnement à ajouter.</param>
+        /// <returns>True si l'opération est un succès, false sinon.</returns>
+        public static bool AddAbonnementRevue(Abonnement abonnement)
+        {
+            try
+            {
+                string req = "INSERT INTO abonnement VALUES (@id, @dateFin, @idRevue);";
+                Dictionary<string, object> parameters = new Dictionary<string, object>
+                {
+                  { "@id", abonnement.Id},
+                  { "@dateFin", abonnement.DateFinAbonnement},
+                  { "@idRevue", abonnement.IdRevue},
+                };
+                BddMySql curs = BddMySql.GetInstance(connectionString);
+                curs.ReqUpdate(req, parameters);
+                curs.Close();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Demande de suppression d'un abonnement
+        /// </summary>
+        /// <param name="id"></param>
+        public static void DeleteCmdAbonnement(string id)
+        {
+            string req = "DELETE FROM abonnement WHERE id = @id";
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("@id", id);
+            BddMySql curs = BddMySql.GetInstance(connectionString);
+            curs.ReqUpdate(req, parameters);
         }
     }
 }

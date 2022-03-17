@@ -13,9 +13,13 @@ namespace Mediatek86.metier
             DelaiMiseADispo = delaiMiseADispo;
         }
 
-
         public string Periodicite { get; set; }
         public bool Empruntable { get; set; }
         public int DelaiMiseADispo { get; set; }
+
+        public override string ToString()
+        {
+            return Titre.ToString();
+        }
     }
 }

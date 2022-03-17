@@ -16,6 +16,7 @@ namespace Mediatek86.controleur
         private readonly List<Categorie> lesGenres;
         private List<CommandeDocumentLivre> lesCommandesLivres;
         private List<CommandeDocumentDvd> lesCommandesDvd;
+        private List<CommandeRevue> lesCommandesRevues;
         private readonly List<Suivi> lesSuivis;
 
 
@@ -173,6 +174,36 @@ namespace Mediatek86.controleur
         {
             lesCommandesDvd = Dao.GetAllCommandesDvd();
             return lesCommandesDvd;
+        }
+
+        /// <summary>
+        /// getter sur la liste des commandes de revues
+        /// </summary>
+        /// <returns>Collection d'objets Commandes</returns>
+        public List<CommandeRevue> GetAllCommandesRevues()
+        {
+            lesCommandesRevues = Dao.GetAllCommandesRevues();
+            return lesCommandesRevues;
+        }
+
+
+        /// <summary>
+        /// Demande d'ajout d'un abonnement
+        /// </summary>
+        /// <param name="commande"></param>
+        public void AddAbonnementRevue(Abonnement abonnement)
+        {
+            Dao.AddAbonnementRevue(abonnement);
+        }
+
+        /// <summary>
+        /// Demande de suppression d'un abonnement
+        /// </summary>
+        /// <param name="id"></param>
+        public void DeleteAbonnement(string id)
+        {
+            Dao.DeleteCmdAbonnement(id);
+            Dao.DeleteCmd(id);
         }
     }
 
