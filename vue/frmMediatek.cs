@@ -1564,13 +1564,25 @@ namespace Mediatek86.vue
         /// <param name="e"></param>
         private void btnSaveCmd_Click(object sender, EventArgs e)
         {
+            // On regarde si l'id de la commande existe déjà si oui une erreur se produit
+            string idCmd = txbIdCmdAdd.Text;
+            int LivreExiste = bdgLivresListeCmd.IndexOf(bdgLivresListeCmd.List.OfType<CommandeDocumentLivre>().ToList().Find(f => f.Id == idCmd));
+            int DVDExiste = bdgDvdListeCmd.IndexOf(bdgDvdListeCmd.List.OfType<CommandeDocumentDvd>().ToList().Find(f => f.Id == idCmd));
+            int RevueExiste = bdgRevueListeCmd.IndexOf(bdgRevueListeCmd.List.OfType<CommandeRevue>().ToList().Find(f => f.Id == idCmd));
+            if (LivreExiste != -1 || DVDExiste != -1 || RevueExiste != -1)
+            {
+                MessageBox.Show("L'Id de la commande existe déjà. Veuillez saisir une Id non existante.", "Erreur");
+                return;
+            }
+            // Demande de l'ajout en fonction des informations entrées 
             if (!txbIdCmdAdd.Text.Equals("") && numMontantCmdAdd.Value > 0 && numNbExemplaireCmdAdd.Value >= 1 &&  MessageBox.Show("Etes vous sûr?", "Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
+
                 int Montant = (int)numMontantCmdAdd.Value;
                 int NbExemplaire = (int)numNbExemplaireCmdAdd.Value;
 
                 Commande commande = new Commande(txbIdCmdAdd.Text, dtpDateCmdAdd.Value, Montant);
-                CommandeDocument commandedocument = new CommandeDocument(txbIdCmdAdd.Text, NbExemplaire, ((CommandeDocumentLivre)bdgLivresListeCmd.List[bdgLivresListeCmd.Position]).IdLivredvd);
+                CommandeDocument commandedocument = new CommandeDocument(txbIdCmdAdd.Text, NbExemplaire, ((Livre)bdgLivresListe.List[bdgLivresListe.Position]).Id);
 
                 controle.AddCommande(commande);
                 controle.AddCommandeDocument(commandedocument);
@@ -1931,13 +1943,24 @@ namespace Mediatek86.vue
         /// <param name="e"></param>
         private void btnSaveCmdDvd_Click(object sender, EventArgs e)
         {
+            // On regarde si l'id de la commande existe déjà si oui une erreur se produit
+            string idCmdDvd = txbIdCmdAddDvd.Text;
+            int LivreExiste = bdgLivresListeCmd.IndexOf(bdgLivresListeCmd.List.OfType<CommandeDocumentLivre>().ToList().Find(f => f.Id == idCmdDvd));
+            int DVDExiste = bdgDvdListeCmd.IndexOf(bdgDvdListeCmd.List.OfType<CommandeDocumentDvd>().ToList().Find(f => f.Id == idCmdDvd));
+            int RevueExiste = bdgRevueListeCmd.IndexOf(bdgRevueListeCmd.List.OfType<CommandeRevue>().ToList().Find(f => f.Id == idCmdDvd));
+            if (LivreExiste != -1 || DVDExiste != -1 || RevueExiste != -1)
+            {
+                MessageBox.Show("L'Id de la commande existe déjà. Veuillez saisir une Id non existante.", "Erreur");
+                return;
+            }
+            // Demande de l'ajout en fonction des informations entrées 
             if (!txbIdCmdAddDvd.Text.Equals("") && numMontantCmdAddDvd.Value > 0 && numNbExemplaireCmdAddDvd.Value >= 1 && MessageBox.Show("Etes vous sûr?", "Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 int Montant = (int)numMontantCmdAddDvd.Value;
                 int NbExemplaire = (int)numNbExemplaireCmdAddDvd.Value;
 
                 Commande commande = new Commande(txbIdCmdAddDvd.Text, dtpDateCmdAddDvd.Value, Montant);
-                CommandeDocument commandedocument = new CommandeDocument(txbIdCmdAddDvd.Text, NbExemplaire, ((CommandeDocumentDvd)bdgDvdListeCmd.List[bdgDvdListeCmd.Position]).IdLivredvd);
+                CommandeDocument commandedocument = new CommandeDocument(txbIdCmdAddDvd.Text, NbExemplaire, ((Dvd)bdgDvdListe.List[bdgDvdListe.Position]).Id);
 
                 controle.AddCommande(commande);
                 controle.AddCommandeDocument(commandedocument);
@@ -2054,8 +2077,8 @@ namespace Mediatek86.vue
             List<CommandeRevue> revues = controle.GetAllCommandesRevues();
             bdgRevueListeCmd.DataSource = revues;
             dgvListeCmdRevue.DataSource = bdgRevueListeCmd;
-            dgvListeCmdRevue.Columns["id"].Visible = false;
-            // dgvListeCmdRevue.Columns["idrevue"].Visible = false;
+            // dgvListeCmdRevue.Columns["id"].Visible = false;
+            dgvListeCmdRevue.Columns["idrevue"].Visible = false;
             dgvListeCmdRevue.Columns["delaiMiseADispo"].Visible = false;
             dgvListeCmdRevue.Columns["periodicite"].Visible = false;
             dgvListeCmdRevue.Columns["genre"].Visible = false;
@@ -2068,14 +2091,14 @@ namespace Mediatek86.vue
         }
 
         /// <summary>
-        /// Remplit le dategrid avec l'id d'un livre reçue en paramètre
+        /// Remplit le dategrid avec l'id d'une revue reçue en paramètre
         /// </summary>
         private void InitDataGridViewRevueRecherche(List<CommandeRevue> revues)
         {
             bdgRevueListeCmd.DataSource = revues;
             dgvListeCmdRevue.DataSource = bdgRevueListeCmd;
-            dgvListeCmdRevue.Columns["id"].Visible = false;
-           // dgvListeCmdRevue.Columns["idrevue"].Visible = false;
+            // dgvListeCmdRevue.Columns["id"].Visible = false;
+            dgvListeCmdRevue.Columns["idrevue"].Visible = false;
             dgvListeCmdRevue.Columns["delaiMiseADispo"].Visible = false;
             dgvListeCmdRevue.Columns["periodicite"].Visible = false;
             dgvListeCmdRevue.Columns["genre"].Visible = false;
@@ -2114,7 +2137,7 @@ namespace Mediatek86.vue
         }
 
         /// <summary>
-        /// Recherche et affichage des commandes correspondant au livre dont on a saisi le numéro.
+        /// Recherche et affichage des commandes correspondant à la revue dont on a saisi le numéro.
         /// Si non trouvé, affichage d'un MessageBox.
         /// </summary>
         /// <param name="sender"></param>
@@ -2221,18 +2244,29 @@ namespace Mediatek86.vue
         /// <param name="e"></param>
         private void btnSaveCmdRevue_Click(object sender, EventArgs e)
         {
-
+            // Si la date de début est supérieur ou égale à la date de fin une erreur se produit
             if (dtpDateCmdAddRevue.Value >= dtpDateFinCmdAddRevue.Value)
             {
                 MessageBox.Show("La date de début de début d'un abonnement ne peut pas être supérieur à la date de fin de celui-ci.", "Erreur");
                 return;
             }
+            // On regarde si l'id de la commande existe déjà si oui une erreur se produit
+            string idCmdRevue = txbIdCmdAddRevue.Text;
+            int LivreExiste = bdgLivresListeCmd.IndexOf(bdgLivresListeCmd.List.OfType<CommandeDocumentLivre>().ToList().Find(f => f.Id == idCmdRevue));
+            int DVDExiste = bdgDvdListeCmd.IndexOf(bdgDvdListeCmd.List.OfType<CommandeDocumentDvd>().ToList().Find(f => f.Id == idCmdRevue));
+            int RevueExiste = bdgRevueListeCmd.IndexOf(bdgRevueListeCmd.List.OfType<CommandeRevue>().ToList().Find(f => f.Id == idCmdRevue));
+            if (LivreExiste != -1 || DVDExiste != -1 || RevueExiste != -1)
+            {
+                MessageBox.Show("L'Id de la commande existe déjà. Veuillez saisir une Id non existante.", "Erreur");
+                return;
+            }
+            // Demande de l'ajout en fonction des informations entrées 
             if (!txbIdCmdAddRevue.Text.Equals("") && numMontantCmdAddRevue.Value > 0 && MessageBox.Show("Etes vous sûr?", "Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 int Montant = (int)numMontantCmdAddRevue.Value;
 
                 Commande commande = new Commande(txbIdCmdAddRevue.Text, dtpDateCmdAddRevue.Value, Montant);
-                Abonnement abonnement = new Abonnement(txbIdCmdAddRevue.Text, dtpDateFinCmdAddRevue.Value, ((CommandeRevue)bdgRevueListeCmd.List[bdgRevueListeCmd.Position]).IdRevue);
+                Abonnement abonnement = new Abonnement(txbIdCmdAddRevue.Text, dtpDateFinCmdAddRevue.Value, ((Revue)bdgRevuesListe.List[bdgRevuesListe.Position]).Id);
 
                 controle.AddCommande(commande);
                 controle.AddAbonnementRevue(abonnement);
@@ -2266,13 +2300,42 @@ namespace Mediatek86.vue
         private void btnRevueSupprCmd_Click(object sender, EventArgs e)
         {
             CommandeRevue abonnement = (CommandeRevue)bdgRevueListeCmd.List[bdgRevueListeCmd.Position];
-            DialogResult dialogResult = MessageBox.Show($"Êtes vous sur(e) de vouloir supprimer l'abonnement ayant pour id : {abonnement.Id}");
-  
+            List<Exemplaire> exemplaires = controle.GetExemplairesRevue(abonnement.IdRevue);
+            bool ExemplaireExiste = false;
+
+            foreach (Exemplaire exemplaire in exemplaires)
+            {
+                if (ParutionDansAbonnement(abonnement.DateCommande, abonnement.DateFinAbo, exemplaire.DateAchat))
+                {
+                    ExemplaireExiste = true;
+                    break;
+                }
+            }
+
+            if (ExemplaireExiste)
+            {
+                MessageBox.Show("Au moins un exemplaire existe pendant la durée de cet abonnement, la suppression est donc impossible.", "Erreur");
+                return;
+            }
+
+            // Demande de suppression si validation
             if (MessageBox.Show("Etes vous sûr?", "Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 controle.DeleteAbonnement(abonnement.Id);
                 InitDataGridViewRevue();
             }
+        }
+
+        /// <summary>
+        /// retourne vrai si la date de parution est entre les 2 autres dates
+        /// </summary>
+        /// <param name="dateCommande"></param>
+        /// <param name="dateFinAbonnement"></param>
+        /// <param name="dateParution"></param>
+        /// <returns></returns>
+        private bool ParutionDansAbonnement(DateTime dateCommande, DateTime dateFinAbonnement, DateTime dateParution)
+        {
+            return (dateParution > dateCommande && dateParution < dateFinAbonnement);
         }
 
         #endregion
