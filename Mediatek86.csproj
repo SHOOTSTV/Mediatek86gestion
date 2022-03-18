@@ -106,6 +106,7 @@
     <Compile Include="metier\LivreDvd.cs" />
     <Compile Include="metier\Public.cs" />
     <Compile Include="metier\Rayon.cs" />
+    <Compile Include="metier\Service.cs" />
     <Compile Include="metier\Suivi.cs" />
     <Compile Include="modele\Dao.cs" />
     <Compile Include="bdd\BddMySql.cs" />
@@ -114,6 +115,12 @@
     <Compile Include="metier\Livre.cs" />
     <Compile Include="metier\Exemplaire.cs" />
     <Compile Include="metier\Revue.cs" />
+    <Compile Include="vue\FormLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="vue\FormLogin.Designer.cs">
+      <DependentUpon>FormLogin.cs</DependentUpon>
+    </Compile>
     <Compile Include="vue\FrmMediatek.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -132,6 +139,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="vue\FormLogin.resx">
+      <DependentUpon>FormLogin.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="vue\FrmMediatek.resx">
       <DependentUpon>FrmMediatek.cs</DependentUpon>
     </EmbeddedResource>

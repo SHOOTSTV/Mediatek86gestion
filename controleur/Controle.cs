@@ -2,6 +2,7 @@
 using Mediatek86.modele;
 using Mediatek86.metier;
 using Mediatek86.vue;
+using System;
 
 
 namespace Mediatek86.controleur
@@ -19,7 +20,6 @@ namespace Mediatek86.controleur
         private List<CommandeRevue> lesCommandesRevues;
         private readonly List<Suivi> lesSuivis;
 
-
         /// <summary>
         /// Ouverture de la fenêtre
         /// </summary>
@@ -32,8 +32,20 @@ namespace Mediatek86.controleur
             lesRayons = Dao.GetAllRayons();
             lesPublics = Dao.GetAllPublics();
             lesSuivis = Dao.GetAllSuivis();
-            FrmMediatek frmMediatek = new FrmMediatek(this);
-            frmMediatek.ShowDialog();
+            frmLogin frmLogin = new frmLogin(this);
+            frmLogin.ShowDialog();
+        }
+
+        /// <summary>
+        /// demande de vérification du login
+        /// </summary>
+        /// <param name="login"></param>
+        /// <param name="pwd"></param>
+        /// <returns></returns>
+        public Service ControleAuthentification(string identifiant, string mdp)
+        {
+            Service service = Dao.ControleAuthentification(identifiant, mdp);
+            return service;
         }
 
         /// <summary>
@@ -129,7 +141,7 @@ namespace Mediatek86.controleur
         }
 
         /// <summary>
-        /// Demande d'ajout d'une commande
+        /// Demande d'ajout d'une commande dans la bdd
         /// </summary>
         /// <param name="commande"></param>
         public void AddCommande(Commande commande)
@@ -138,7 +150,7 @@ namespace Mediatek86.controleur
         }
 
         /// <summary>
-        /// Demande d'ajout d'une commande document
+        /// Demande d'ajout d'une commande document dans la bdd
         /// </summary>
         /// <param name="commandedocument"></param>
         public void AddCommandeDocument(CommandeDocument commandedocument)
@@ -188,7 +200,7 @@ namespace Mediatek86.controleur
 
 
         /// <summary>
-        /// Demande d'ajout d'un abonnement
+        /// Demande d'ajout d'un abonnement dans la bdd
         /// </summary>
         /// <param name="commande"></param>
         public void AddAbonnementRevue(Abonnement abonnement)

@@ -8,12 +8,41 @@ namespace Mediatek86.modele
 {
     public static class Dao
     {
-
+        // connexion à la bdd
         private static readonly string server = "localhost";
         private static readonly string userid = "root";
         private static readonly string password = "";
         private static readonly string database = "mediatek86";
         private static readonly string connectionString = "server="+server+";user id="+userid+";password="+password+";database="+database+";SslMode=none";
+
+        /// <summary>
+        /// Contrôle si l'user à le droit de se connecter (login password)
+        /// </summary>
+        /// <param name="identifiant"></param>
+        /// <param name="mdp"></param>
+        /// <returns></returns>
+        public static Service ControleAuthentification(string identifiant, string mdp)
+        {
+            string req = "SELECT identifiant, service, s.nom FROM user u ";
+            req += "LEFT JOIN service s on s.id = u.service ";
+            req += "WHERE u.identifiant = @identifiant AND u.mdp = @mdp";
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("@identifiant", identifiant);
+            parameters.Add("@mdp", mdp);
+            BddMySql curs = BddMySql.GetInstance(connectionString);
+            curs.ReqSelect(req, parameters);
+            if (curs.Read())
+            {
+                Service service = new Service((string)curs.Field("identifiant"), (int)curs.Field("service"), (string)curs.Field("nom"));
+                curs.Close();
+                return service;
+            }
+            else
+            {
+                curs.Close();
+                return null;
+            }
+        }
 
         /// <summary>
         /// Retourne tous les genres à partir de la BDD
@@ -346,7 +375,7 @@ namespace Mediatek86.modele
         }
 
         /// <summary>
-        /// Demande d'ajout d'une commande
+        /// Demande d'ajout d'une commande dans la bdd
         /// </summary>
         /// <param name="commande"></param>
         public static void AddCommande(Commande commande)
@@ -362,7 +391,7 @@ namespace Mediatek86.modele
         }
 
         /// <summary>
-        /// Demande d'ajout d'une commandedocument
+        /// Demande d'ajout d'une commandedocument dans la bdd
         /// </summary>
         /// <param name="commandedocument"></param>
         public static void AddCommandeDocument(CommandeDocument commandedocument)

@@ -6,18 +6,30 @@ using System.Threading.Tasks;
 
 namespace Mediatek86.metier
 {
+    /// <summary>
+    /// Classe qui gère le constructeur des Suivis
+    /// </summary>
     public class Suivi
     {
-
-
-        public string IdSuivi { get; }
-        public string Libelle { get; }
-
+        /// <summary>
+        /// Constructeur
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="libelle"></param>
         public Suivi(string id, string libelle)
         {
             IdSuivi = id;
             Libelle = libelle;
         }
+
+        /// <summary>
+        /// getter sur l'id d'un suivi
+        /// </summary>
+        public string IdSuivi { get; }
+        /// <summary>
+        /// getter sur le libelle d'un suivi
+        /// </summary>
+        public string Libelle { get; }
 
         /// <summary>
         /// stock les états de commandes dans une liste

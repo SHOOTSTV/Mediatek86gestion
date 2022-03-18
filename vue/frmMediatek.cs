@@ -34,6 +34,7 @@ namespace Mediatek86.vue
         private List<Dvd> lesDvd = new List<Dvd>();
         private List<Revue> lesRevues = new List<Revue>();
         private List<Exemplaire> lesExemplaires = new List<Exemplaire>();
+        private Service service;
         private List<CommandeDocumentLivre> lesCommandesLivres = new List<CommandeDocumentLivre>();
         private List<CommandeDocumentDvd> lesCommandesDvd = new List<CommandeDocumentDvd>();
         private List<CommandeRevue> lesCommandesRevues = new List<CommandeRevue>();
@@ -46,10 +47,11 @@ namespace Mediatek86.vue
         #endregion
 
 
-        internal FrmMediatek(Controle controle)
+        internal FrmMediatek(Controle controle, Service service)
         {
             InitializeComponent();
             this.controle = controle;
+            this.service = service;
         }
 
 
@@ -406,6 +408,13 @@ namespace Mediatek86.vue
         /// <param name="e"></param>
         private void TabLivres_Enter(object sender, EventArgs e)
         {
+            if (service.ServiceInt == 2) //Service pret
+            {
+                tabOngletsApplication.TabPages.RemoveByKey("tabReceptionRevue");
+                tabOngletsApplication.TabPages.RemoveByKey("tabCmdLivres");
+                tabOngletsApplication.TabPages.RemoveByKey("tabCmdDvd");
+                tabOngletsApplication.TabPages.RemoveByKey("tabCmdRevues");
+            }
             lesLivres = controle.GetAllLivres();
             RemplirComboCategorie(controle.GetAllGenres(), bdgGenres, cbxLivresGenres);
             RemplirComboCategorie(controle.GetAllPublics(), bdgPublics, cbxLivresPublics);
@@ -1680,6 +1689,7 @@ namespace Mediatek86.vue
             VideLivresZonesCmd();
             string titreColonne = dgvListeCmdLivres.Columns[e.ColumnIndex].HeaderText;
             List<CommandeDocumentLivre> sortedList = new List<CommandeDocumentLivre>();
+            lesCommandesLivres = controle.GetAllCommandesLivres();
             switch (titreColonne)
             {
                 case "Id":
@@ -1698,7 +1708,7 @@ namespace Mediatek86.vue
                     sortedList = lesCommandesLivres.OrderByDescending(o => o.Libelle).ToList();
                     break;
             }
-            InitDataGridViewLivreRecherche(sortedList);
+            InitDataGridViewLivreRecherche(sortedList);        
         }
 
         #endregion
@@ -2089,6 +2099,7 @@ namespace Mediatek86.vue
             VideDvdZonesCmd();
             string titreColonne = dgvListeCmdDvd.Columns[e.ColumnIndex].HeaderText;
             List<CommandeDocumentDvd> sortedList = new List<CommandeDocumentDvd>();
+            lesCommandesDvd = controle.GetAllCommandesDvd();
             switch (titreColonne)
             {
                 case "Id":
@@ -2409,6 +2420,7 @@ namespace Mediatek86.vue
             VideRevueZonesCmd();
             string titreColonne = dgvListeCmdRevue.Columns[e.ColumnIndex].HeaderText;
             List<CommandeRevue> sortedList = new List<CommandeRevue>();
+            lesCommandesRevues = controle.GetAllCommandesRevues();
             switch (titreColonne)
             {
                 case "Id":
@@ -2426,8 +2438,6 @@ namespace Mediatek86.vue
             }
             InitDataGridViewRevueRecherche(sortedList);
         }
-
         #endregion
-
     }
 }
