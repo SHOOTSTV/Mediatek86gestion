@@ -1670,6 +1670,37 @@ namespace Mediatek86.vue
             }
         }
 
+        /// <summary>
+        /// Tri sur les colonnes
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgvListeCmdLivres_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            VideLivresZonesCmd();
+            string titreColonne = dgvListeCmdLivres.Columns[e.ColumnIndex].HeaderText;
+            List<CommandeDocumentLivre> sortedList = new List<CommandeDocumentLivre>();
+            switch (titreColonne)
+            {
+                case "Id":
+                    sortedList = lesCommandesLivres.OrderByDescending(o => o.Id).ToList();
+                    break;
+                case "DateCommande":
+                    sortedList = lesCommandesLivres.OrderByDescending(o => o.DateCommande).ToList();
+                    break;
+                case "Montant":
+                    sortedList = lesCommandesLivres.OrderByDescending(o => o.Montant).ToList();
+                    break;
+                case "NbExemplaire":
+                    sortedList = lesCommandesLivres.OrderByDescending(o => o.NbExemplaire).ToList();
+                    break;
+                case "Libelle":
+                    sortedList = lesCommandesLivres.OrderByDescending(o => o.Libelle).ToList();
+                    break;
+            }
+            InitDataGridViewLivreRecherche(sortedList);
+        }
+
         #endregion
 
         #region Commandes de DVD
@@ -2048,6 +2079,36 @@ namespace Mediatek86.vue
             }
         }
 
+        /// <summary>
+        /// Tri sur les colonnes
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgvListeCmdDvd_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            VideDvdZonesCmd();
+            string titreColonne = dgvListeCmdDvd.Columns[e.ColumnIndex].HeaderText;
+            List<CommandeDocumentDvd> sortedList = new List<CommandeDocumentDvd>();
+            switch (titreColonne)
+            {
+                case "Id":
+                    sortedList = lesCommandesDvd.OrderByDescending(o => o.Id).ToList();
+                    break;
+                case "DateCommande":
+                    sortedList = lesCommandesDvd.OrderByDescending(o => o.DateCommande).ToList();
+                    break;
+                case "Montant":
+                    sortedList = lesCommandesDvd.OrderByDescending(o => o.Montant).ToList();
+                    break;
+                case "NbExemplaire":
+                    sortedList = lesCommandesDvd.OrderByDescending(o => o.NbExemplaire).ToList();
+                    break;
+                case "Libelle":
+                    sortedList = lesCommandesDvd.OrderByDescending(o => o.Libelle).ToList();
+                    break;
+            }
+            InitDataGridViewDvdRecherche(sortedList);
+        }
         #endregion
 
         #region Commandes de revues
@@ -2336,6 +2397,34 @@ namespace Mediatek86.vue
         private bool ParutionDansAbonnement(DateTime dateCommande, DateTime dateFinAbonnement, DateTime dateParution)
         {
             return (dateParution > dateCommande && dateParution < dateFinAbonnement);
+        }
+
+        /// <summary>
+        /// Tri sur les colonnes
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgvListeCmdRevue_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            VideRevueZonesCmd();
+            string titreColonne = dgvListeCmdRevue.Columns[e.ColumnIndex].HeaderText;
+            List<CommandeRevue> sortedList = new List<CommandeRevue>();
+            switch (titreColonne)
+            {
+                case "Id":
+                    sortedList = lesCommandesRevues.OrderByDescending(o => o.Id).ToList();
+                    break;
+                case "DateCommande":
+                    sortedList = lesCommandesRevues.OrderByDescending(o => o.DateCommande).ToList();
+                    break;
+                case "Montant":
+                    sortedList = lesCommandesRevues.OrderByDescending(o => o.Montant).ToList();
+                    break;
+                case "DateFinAbo":
+                    sortedList = lesCommandesRevues.OrderByDescending(o => o.DateFinAbo).ToList();
+                    break;
+            }
+            InitDataGridViewRevueRecherche(sortedList);
         }
 
         #endregion

@@ -2384,7 +2384,7 @@ namespace Mediatek86.vue
             // btnLivresSupprCmd
             // 
             this.btnLivresSupprCmd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLivresSupprCmd.Location = new System.Drawing.Point(753, 18);
+            this.btnLivresSupprCmd.Location = new System.Drawing.Point(753, 17);
             this.btnLivresSupprCmd.Name = "btnLivresSupprCmd";
             this.btnLivresSupprCmd.Size = new System.Drawing.Size(96, 22);
             this.btnLivresSupprCmd.TabIndex = 15;
@@ -2435,6 +2435,7 @@ namespace Mediatek86.vue
             this.dgvListeCmdLivres.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvListeCmdLivres.Size = new System.Drawing.Size(540, 200);
             this.dgvListeCmdLivres.TabIndex = 4;
+            this.dgvListeCmdLivres.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvListeCmdLivres_ColumnHeaderMouseClick);
             this.dgvListeCmdLivres.SelectionChanged += new System.EventHandler(this.dgvListeCmdLivres_SelectionChanged);
             // 
             // tabCmdDvd
@@ -2950,6 +2951,7 @@ namespace Mediatek86.vue
             this.dgvListeCmdDvd.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvListeCmdDvd.Size = new System.Drawing.Size(535, 208);
             this.dgvListeCmdDvd.TabIndex = 4;
+            this.dgvListeCmdDvd.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvListeCmdDvd_ColumnHeaderMouseClick);
             this.dgvListeCmdDvd.SelectionChanged += new System.EventHandler(this.dgvListeCmdDvd_SelectionChanged);
             // 
             // tabCmdRevues
@@ -3377,6 +3379,7 @@ namespace Mediatek86.vue
             this.dgvListeCmdRevue.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvListeCmdRevue.Size = new System.Drawing.Size(535, 208);
             this.dgvListeCmdRevue.TabIndex = 4;
+            this.dgvListeCmdRevue.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvListeCmdRevue_ColumnHeaderMouseClick);
             this.dgvListeCmdRevue.SelectionChanged += new System.EventHandler(this.dgvListeCmdRevue_SelectionChanged);
             // 
             // FrmMediatek
