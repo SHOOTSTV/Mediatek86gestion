@@ -25,7 +25,7 @@ namespace Mediatek86.modele
         {
             string req = "SELECT identifiant, service, s.nom FROM user u ";
             req += "LEFT JOIN service s on s.id = u.service ";
-            req += "WHERE u.identifiant = @identifiant AND u.mdp = @mdp";
+            req += "WHERE u.identifiant = @identifiant AND u.mdp = SHA2(@mdp, 256)";
             Dictionary<string, object> parameters = new Dictionary<string, object>();
             parameters.Add("@identifiant", identifiant);
             parameters.Add("@mdp", mdp);

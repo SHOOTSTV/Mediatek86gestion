@@ -5,7 +5,6 @@
     /// </summary>
     public class Livre : LivreDvd
     {
-
         private readonly string isbn;
         private readonly string auteur;
         private readonly string collection;

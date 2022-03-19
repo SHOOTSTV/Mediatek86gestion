@@ -11,7 +11,6 @@ namespace Mediatek86.metier
     /// </summary>
     public abstract class LivreDvd : Document
     {
-
         /// <summary>
         /// Constructeur
         /// </summary>

@@ -15,9 +15,6 @@ namespace Mediatek86.controleur
         private readonly List<Categorie> lesRayons;
         private readonly List<Categorie> lesPublics;
         private readonly List<Categorie> lesGenres;
-        private List<CommandeDocumentLivre> lesCommandesLivres;
-        private List<CommandeDocumentDvd> lesCommandesDvd;
-        private List<CommandeRevue> lesCommandesRevues;
         private readonly List<Suivi> lesSuivis;
 
         /// <summary>
@@ -136,6 +133,7 @@ namespace Mediatek86.controleur
         /// <returns>Collection d'objets Commandes</returns>
         public List<CommandeDocumentLivre> GetAllCommandesLivres()
         {
+            List<CommandeDocumentLivre> lesCommandesLivres;
             lesCommandesLivres = Dao.GetAllCommandesLivres();
             return lesCommandesLivres;
         }
@@ -184,6 +182,7 @@ namespace Mediatek86.controleur
         /// <returns>Collection d'objets Commandes</returns>
         public List<CommandeDocumentDvd> GetAllCommandesDvd()
         {
+            List<CommandeDocumentDvd> lesCommandesDvd;
             lesCommandesDvd = Dao.GetAllCommandesDvd();
             return lesCommandesDvd;
         }
@@ -194,6 +193,7 @@ namespace Mediatek86.controleur
         /// <returns>Collection d'objets Commandes</returns>
         public List<CommandeRevue> GetAllCommandesRevues()
         {
+            List<CommandeRevue> lesCommandesRevues;
             lesCommandesRevues = Dao.GetAllCommandesRevues();
             return lesCommandesRevues;
         }

@@ -408,7 +408,8 @@ namespace Mediatek86.vue
         /// <param name="e"></param>
         private void TabLivres_Enter(object sender, EventArgs e)
         {
-            if (service.ServiceInt == 2) //Service pret
+            // Si le service est pret alors on enleve des onglets
+            if (service.ServiceInt == 2)
             {
                 tabOngletsApplication.TabPages.RemoveByKey("tabReceptionRevue");
                 tabOngletsApplication.TabPages.RemoveByKey("tabCmdLivres");
@@ -1532,7 +1533,7 @@ namespace Mediatek86.vue
             grpLivresCmdAjout.Enabled = true;
             AddCmdLivre = true;
 
-            if (EditCmdLivre == true)
+            if (EditCmdLivre)
             {
                 grpLivresCmdModif.Enabled = false;
                 EditCmdLivre = false;
@@ -1556,7 +1557,7 @@ namespace Mediatek86.vue
             grpLivresCmdModif.Enabled = true;
             EditCmdLivre = true;
 
-            if (AddCmdLivre == true)
+            if (AddCmdLivre)
             {
                 grpLivresCmdAjout.Enabled = false;
                 AddCmdLivre = false;
@@ -1738,8 +1739,8 @@ namespace Mediatek86.vue
         /// </summary>
         private void InitDataGridViewDvd()
         {
-            List<CommandeDocumentDvd> lesDvd = controle.GetAllCommandesDvd();
-            bdgDvdListeCmd.DataSource = lesDvd;
+            List<CommandeDocumentDvd> Dvd = controle.GetAllCommandesDvd();
+            bdgDvdListeCmd.DataSource = Dvd;
             dgvListeCmdDvd.DataSource = bdgDvdListeCmd;
             // dgvListeCmdDvd.Columns["id"].Visible = false;
             dgvListeCmdDvd.Columns["idlivredvd"].Visible = false;
@@ -1812,11 +1813,11 @@ namespace Mediatek86.vue
         {
             if (!txbDvdNumRechercheCmd.Text.Equals(""))
             {
-                List<CommandeDocumentDvd> lesDvd = lesCommandesDvd.FindAll(x => x.IdLivredvd.Equals(txbDvdNumRechercheCmd.Text));
+                List<CommandeDocumentDvd> Dvd = lesCommandesDvd.FindAll(x => x.IdLivredvd.Equals(txbDvdNumRechercheCmd.Text));
                 txbDvdNumRechercheCmd.Text = "";
-                if (lesDvd.Any())
+                if (Dvd.Any())
                 {
-                    InitDataGridViewDvdRecherche(lesDvd);
+                    InitDataGridViewDvdRecherche(Dvd);
                 }
                 else
                 {
@@ -1842,8 +1843,8 @@ namespace Mediatek86.vue
             {
                 try
                 {
-                    CommandeDocumentDvd lesDvd = (CommandeDocumentDvd)bdgDvdListeCmd.List[bdgDvdListeCmd.Position];
-                    AfficheDvdInfosCmd(lesDvd);
+                    CommandeDocumentDvd Dvd = (CommandeDocumentDvd)bdgDvdListeCmd.List[bdgDvdListeCmd.Position];
+                    AfficheDvdInfosCmd(Dvd);
                 }
                 catch
                 {
@@ -1943,7 +1944,7 @@ namespace Mediatek86.vue
             grpDvdCmdAjout.Enabled = true;
             AddCmdDvd = true;
 
-            if (EditCmdDvd == true)
+            if (EditCmdDvd)
             {
                 grpDvdCmdModif.Enabled = false;
                 EditCmdDvd = false;
@@ -1967,7 +1968,7 @@ namespace Mediatek86.vue
             grpDvdCmdModif.Enabled = true;
             EditCmdDvd = true;
 
-            if (AddCmdDvd == true)
+            if (AddCmdDvd)
             {
                 grpDvdCmdAjout.Enabled = false;
                 AddCmdDvd = false;
@@ -2218,11 +2219,11 @@ namespace Mediatek86.vue
         {
             if (!txbRevueNumRechercheCmd.Text.Equals(""))
             {
-                List<CommandeRevue> lesRevues = lesCommandesRevues.FindAll(x => x.IdRevue.Equals(txbRevueNumRechercheCmd.Text));
+                List<CommandeRevue> Revues = lesCommandesRevues.FindAll(x => x.IdRevue.Equals(txbRevueNumRechercheCmd.Text));
                 txbRevueNumRechercheCmd.Text = "";
-                if (lesRevues.Any())
+                if (Revues.Any())
                 {
-                    InitDataGridViewRevueRecherche(lesRevues);
+                    InitDataGridViewRevueRecherche(Revues);
                 }
                 else
                 {
@@ -2248,8 +2249,8 @@ namespace Mediatek86.vue
             {
                 try
                 {
-                    CommandeRevue lesRevues = (CommandeRevue)bdgRevueListeCmd.List[bdgRevueListeCmd.Position];
-                    AfficheRevuesInfosCmd(lesRevues);
+                    CommandeRevue Revues = (CommandeRevue)bdgRevueListeCmd.List[bdgRevueListeCmd.Position];
+                    AfficheRevuesInfosCmd(Revues);
                 }
                 catch
                 {
@@ -2285,6 +2286,8 @@ namespace Mediatek86.vue
         {
             txbIdCmdAddRevue.Text = "";
             numMontantCmdAddRevue.Value = 0;
+            dtpDateCmdAddRevue.Value = DateTime.Today;
+            dtpDateFinCmdAddRevue.Value = DateTime.Today;
         }
 
         /// <summary>
@@ -2365,7 +2368,7 @@ namespace Mediatek86.vue
         }
 
         /// <summary>
-        /// Demande de suppression d'une commande
+        /// Demande de suppression d'une commande de revue si il n'y a pas de date d'achat d'un exemplaire qui se situe entre les dates d'achats et de fin d'abonnements
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -2374,22 +2377,17 @@ namespace Mediatek86.vue
             CommandeRevue abonnement = (CommandeRevue)bdgRevueListeCmd.List[bdgRevueListeCmd.Position];
             List<Exemplaire> exemplaires = controle.GetExemplairesRevue(abonnement.IdRevue);
             bool ExemplaireExiste = false;
-
-            foreach (Exemplaire exemplaire in exemplaires)
+            // Contrôle les dates (début,fin) d'abonnement et de l'exemplaire (achat) pour voir si une ou plusieurs coincident
+            foreach (var exemplaire in exemplaires.Where(x => ParutionDansAbonnement(abonnement.DateCommande, abonnement.DateFinAbo, x.DateAchat)))
             {
-                if (ParutionDansAbonnement(abonnement.DateCommande, abonnement.DateFinAbo, exemplaire.DateAchat))
-                {
-                    ExemplaireExiste = true;
-                    break;
-                }
+                   ExemplaireExiste = true;          
             }
-
+            // Si date de l'exemplaire présent dans les dates de l'abonnement
             if (ExemplaireExiste)
             {
                 MessageBox.Show("Au moins un exemplaire existe pendant la durée de cet abonnement, la suppression est donc impossible.", "Erreur");
                 return;
             }
-
             // Demande de suppression si validation
             if (MessageBox.Show("Etes vous sûr?", "Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
