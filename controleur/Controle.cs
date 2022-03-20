@@ -2,12 +2,14 @@
 using Mediatek86.modele;
 using Mediatek86.metier;
 using Mediatek86.vue;
-using System;
 using Serilog;
 
 
 namespace Mediatek86.controleur
 {
+    /// <summary>
+    /// Gère les interractions entre la vue et le modèle
+    /// </summary>
     public class Controle
     {
         private readonly List<Livre> lesLivres;
@@ -107,7 +109,7 @@ namespace Mediatek86.controleur
         }
 
         /// <summary>
-        /// Recupère tout les statut de la base de données
+        /// Récupère tout les suivis
         /// </summary>
         /// <returns>La liste contenant tout les suivis</returns>
         public List<Suivi> GetAllSuivis()
@@ -116,7 +118,7 @@ namespace Mediatek86.controleur
         }
 
         /// <summary>
-        /// récupère les exemplaires d'une revue
+        /// Récupère les exemplaires d'une revue
         /// </summary>
         /// <returns>Collection d'objets Exemplaire</returns>
         public List<Exemplaire> GetExemplairesRevue(string idDocuement)
@@ -125,7 +127,7 @@ namespace Mediatek86.controleur
         }
 
         /// <summary>
-        /// Crée un exemplaire d'une revue dans la bdd
+        /// Crée un exemplaire d'une revue 
         /// </summary>
         /// <param name="exemplaire">L'objet Exemplaire concerné</param>
         /// <returns>True si la création a pu se faire</returns>
@@ -146,7 +148,7 @@ namespace Mediatek86.controleur
         }
 
         /// <summary>
-        /// Demande d'ajout d'une commande dans la bdd
+        /// Demande d'ajout d'une commande
         /// </summary>
         /// <param name="commande"></param>
         public void AddCommande(Commande commande)
@@ -155,7 +157,7 @@ namespace Mediatek86.controleur
         }
 
         /// <summary>
-        /// Demande d'ajout d'une commande document dans la bdd
+        /// Demande d'ajout d'une commande document
         /// </summary>
         /// <param name="commandedocument"></param>
         public void AddCommandeDocument(CommandeDocument commandedocument)
@@ -164,7 +166,7 @@ namespace Mediatek86.controleur
         }
 
         /// <summary>
-        /// Demande de modification d'une commande de livre
+        /// Demande de modification d'une commande
         /// </summary>
         /// <param name="idCommande"></param>
         /// <param name="idSuivi"></param>
@@ -174,7 +176,7 @@ namespace Mediatek86.controleur
         }
 
         /// <summary>
-        /// Demande de suppression d'une commande de livre
+        /// Demande de suppression d'une commande
         /// </summary>
         /// <param name="id"></param>
         public void DeleteCmd(string id)
@@ -207,7 +209,7 @@ namespace Mediatek86.controleur
 
 
         /// <summary>
-        /// Demande d'ajout d'un abonnement dans la bdd
+        /// Demande d'ajout d'un abonnement
         /// </summary>
         /// <param name="commande"></param>
         public void AddAbonnementRevue(Abonnement abonnement)
@@ -225,6 +227,10 @@ namespace Mediatek86.controleur
             Dao.DeleteCmd(id);
         }
 
+        /// <summary>
+        /// getter sur la liste des abonnements finissant dans 30jours
+        /// </summary>
+        /// <returns></returns>
         public string GetAbo30days()
         {
             string getabo30days = Dao.GetAbo30days();

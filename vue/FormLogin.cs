@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Mediatek86.controleur;
 using Mediatek86.metier;
@@ -18,7 +11,7 @@ namespace Mediatek86.vue
     public partial class frmLogin : Form
     {
         /// <summary>
-        /// instance du controleur
+        /// Instance du controleur
         /// </summary>
         private readonly Controle controle;
 

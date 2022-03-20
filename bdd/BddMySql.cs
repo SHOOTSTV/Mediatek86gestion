@@ -5,6 +5,9 @@ using MySql.Data.MySqlClient;
 
 namespace Mediatek86.bdd
 {
+    /// <summary>
+    /// Connexion à la base de données et éxecution des requêtes
+    /// </summary>
     public class BddMySql
     {
         /// <summary>

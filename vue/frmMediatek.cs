@@ -8,6 +8,9 @@ using System.Linq;
 
 namespace Mediatek86.vue
 {
+    /// <summary>
+    /// Fenêtre qui contient toutes les données de Mediatek
+    /// </summary>
     public partial class FrmMediatek : Form
     {
 
@@ -1733,7 +1736,7 @@ namespace Mediatek86.vue
 
         #endregion
 
-        #region Commandes de DVD
+        #region Commandes de dvd
         //-----------------------------------------------------------
         // ONGLET "COMMANDES DE DVD"
         //-----------------------------------------------------------

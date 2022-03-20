@@ -29,11 +29,11 @@ namespace Mediatek86.metier
         /// </summary>
         public string Id { get; set; }
         /// <summary>
-        /// getter sur la date de commande de l'id
+        /// getter sur la date de commande correspondant à l'id
         /// </summary>
         public DateTime DateCommande { get; set; }
         /// <summary>
-        /// getter sur le montant de la commande de l'id
+        /// getter sur le montant de la commande correspondant à l'id
         /// </summary>
         public int Montant { get; set; }
     }

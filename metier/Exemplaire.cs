@@ -40,6 +40,9 @@ namespace Mediatek86.metier
         /// getter setter sur l'id de l'état d'un exemplaire
         /// </summary>
         public string IdEtat { get; set; }
+        /// <summary>
+        /// getter setter sur l'id du document
+        /// </summary>
         public string IdDocument { get; set; }
     }
 }

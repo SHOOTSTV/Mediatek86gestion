@@ -2,14 +2,16 @@
 using System.Collections.Generic;
 using Mediatek86.bdd;
 using System;
-using System.Windows.Forms;
 using Serilog;
 
 namespace Mediatek86.modele
 {
+    /// <summary>
+    /// Classe qui permet de gérer toute demandes qui concerne les données
+    /// </summary>
     public static class Dao
     {
-        // connexion à la bdd
+        // connexion à la BDD
         private static readonly string server = "localhost";
         private static readonly string userid = "root";
         private static readonly string password = "";
@@ -90,7 +92,7 @@ namespace Mediatek86.modele
         }
 
         /// <summary>
-        /// Retourne toutes les catégories de public à partir de la BDD
+        /// Retourne toutes les types de public à partir de la BDD
         /// </summary>
         /// <returns>Collection d'objets Public</returns>
         public static List<Categorie> GetAllPublics()
@@ -111,7 +113,7 @@ namespace Mediatek86.modele
         }
 
         /// <summary>
-        /// Retourne toutes les livres à partir de la BDD
+        /// Retourne tout les livres à partir de la BDD
         /// </summary>
         /// <returns>Liste d'objets Livre</returns>
         public static List<Livre> GetAllLivres()
@@ -152,7 +154,7 @@ namespace Mediatek86.modele
         }
 
         /// <summary>
-        /// Retourne toutes les dvd à partir de la BDD
+        /// Retourne tout les dvd à partir de la BDD
         /// </summary>
         /// <returns>Liste d'objets Dvd</returns>
         public static List<Dvd> GetAllDvd()
@@ -268,7 +270,7 @@ namespace Mediatek86.modele
         }
 
         /// <summary>
-        /// Permet d'obtenir tout les suivis
+        /// Retourne tout les suivis
         /// </summary>
         /// <returns></returns>
         public static List<Suivi> GetAllSuivis()
@@ -300,7 +302,7 @@ namespace Mediatek86.modele
         }
 
         /// <summary>
-        /// ecriture d'un exemplaire en base de données
+        /// Ecriture d'un exemplaire dans la BDD
         /// </summary>
         /// <param name="exemplaire"></param>
         /// <returns>true si l'insertion a pu se faire</returns>
@@ -382,7 +384,7 @@ namespace Mediatek86.modele
         }
 
         /// <summary>
-        /// Demande d'ajout d'une commande dans la bdd
+        /// Demande d'ajout d'une commande dans la BDD
         /// </summary>
         /// <param name="commande"></param>
         public static void AddCommande(Commande commande)
@@ -398,7 +400,7 @@ namespace Mediatek86.modele
         }
 
         /// <summary>
-        /// Demande d'ajout d'une commandedocument dans la bdd
+        /// Demande d'ajout d'une commandedocument dans la BDD
         /// </summary>
         /// <param name="commandedocument"></param>
         public static void AddCommandeDocument(CommandeDocument commandedocument)
@@ -415,7 +417,7 @@ namespace Mediatek86.modele
         }
 
         /// <summary>
-        /// Demande de modification du suivi d'une commande de livre
+        /// Demande de modification du suivi d'une commande dans la BDD
         /// </summary>
         /// <param name="idcommande"></param>
         /// <param name="idSuivi"></param>
@@ -432,7 +434,7 @@ namespace Mediatek86.modele
         }
 
         /// <summary>
-        /// Demande de suppression d'une commandedocument
+        /// Demande de suppression d'une commandedocument dans la BDD
         /// </summary>
         /// <param name="id"></param>
         public static void DeleteCmdDoc(string id)
@@ -445,7 +447,7 @@ namespace Mediatek86.modele
         }
 
         /// <summary>
-        /// Demande de suppresion d'une commande
+        /// Demande de suppresion d'une commande dans la BDD
         /// </summary>
         /// <param name="id"></param>
         public static void DeleteCmd(string id)
@@ -458,7 +460,7 @@ namespace Mediatek86.modele
         }
 
         /// <summary>
-        /// Retourne toutes les commandes de Dvd à partir de la BDD
+        /// Retourne toutes les commandes de Dvd dans la BDD
         /// </summary>
         /// <returns>Liste d'objets Commandes</returns>
         public static List<CommandeDocumentDvd> GetAllCommandesDvd()
@@ -511,7 +513,7 @@ namespace Mediatek86.modele
         }
 
         /// <summary>
-        /// Retourne toutes commandes de revues à partir de la BDD
+        /// Retourne toutes commandes de revues dans la BDD
         /// </summary>
         /// <returns>Liste d'objets Commandes</returns>
         public static List<CommandeRevue> GetAllCommandesRevues()
@@ -563,7 +565,7 @@ namespace Mediatek86.modele
         }
 
         /// <summary>
-        /// Ajoute une ligne à la table abonnement.
+        /// Ajoute un abonnement dans la BDD
         /// </summary>
         /// <param name="abonnement">Abonnement à ajouter.</param>
         /// <returns>True si l'opération est un succès, false sinon.</returns>
@@ -591,7 +593,7 @@ namespace Mediatek86.modele
         }
 
         /// <summary>
-        /// Demande de suppression d'un abonnement
+        /// Demande de suppression d'un abonnement dans la BDD
         /// </summary>
         /// <param name="id"></param>
         public static void DeleteCmdAbonnement(string id)
