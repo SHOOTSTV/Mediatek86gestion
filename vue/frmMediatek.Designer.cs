@@ -2164,7 +2164,7 @@ namespace Mediatek86.vue
             this.grpLivresCmdModif.Controls.Add(this.label82);
             this.grpLivresCmdModif.Controls.Add(this.btnEditCmd);
             this.grpLivresCmdModif.Enabled = false;
-            this.grpLivresCmdModif.Location = new System.Drawing.Point(578, 251);
+            this.grpLivresCmdModif.Location = new System.Drawing.Point(578, 256);
             this.grpLivresCmdModif.Name = "grpLivresCmdModif";
             this.grpLivresCmdModif.Size = new System.Drawing.Size(271, 100);
             this.grpLivresCmdModif.TabIndex = 19;
@@ -2680,7 +2680,7 @@ namespace Mediatek86.vue
             this.grpDvdCmdModif.Controls.Add(this.label90);
             this.grpDvdCmdModif.Controls.Add(this.btnEditCmdDvd);
             this.grpDvdCmdModif.Enabled = false;
-            this.grpDvdCmdModif.Location = new System.Drawing.Point(580, 256);
+            this.grpDvdCmdModif.Location = new System.Drawing.Point(577, 256);
             this.grpDvdCmdModif.Name = "grpDvdCmdModif";
             this.grpDvdCmdModif.Size = new System.Drawing.Size(271, 100);
             this.grpDvdCmdModif.TabIndex = 22;
@@ -2878,7 +2878,7 @@ namespace Mediatek86.vue
             // btnDvdAjouterCmd
             // 
             this.btnDvdAjouterCmd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDvdAjouterCmd.Location = new System.Drawing.Point(553, 16);
+            this.btnDvdAjouterCmd.Location = new System.Drawing.Point(542, 17);
             this.btnDvdAjouterCmd.Name = "btnDvdAjouterCmd";
             this.btnDvdAjouterCmd.Size = new System.Drawing.Size(96, 22);
             this.btnDvdAjouterCmd.TabIndex = 20;
@@ -2889,7 +2889,7 @@ namespace Mediatek86.vue
             // btnDvdModifCmd
             // 
             this.btnDvdModifCmd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDvdModifCmd.Location = new System.Drawing.Point(655, 16);
+            this.btnDvdModifCmd.Location = new System.Drawing.Point(644, 17);
             this.btnDvdModifCmd.Name = "btnDvdModifCmd";
             this.btnDvdModifCmd.Size = new System.Drawing.Size(96, 22);
             this.btnDvdModifCmd.TabIndex = 19;
@@ -2900,7 +2900,7 @@ namespace Mediatek86.vue
             // btnDvdSupprCmd
             // 
             this.btnDvdSupprCmd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDvdSupprCmd.Location = new System.Drawing.Point(757, 16);
+            this.btnDvdSupprCmd.Location = new System.Drawing.Point(746, 17);
             this.btnDvdSupprCmd.Name = "btnDvdSupprCmd";
             this.btnDvdSupprCmd.Size = new System.Drawing.Size(96, 22);
             this.btnDvdSupprCmd.TabIndex = 18;
@@ -3199,18 +3199,18 @@ namespace Mediatek86.vue
             this.grpRevueCmdAjout.Controls.Add(this.label97);
             this.grpRevueCmdAjout.Controls.Add(this.btnSaveCmdRevue);
             this.grpRevueCmdAjout.Enabled = false;
-            this.grpRevueCmdAjout.Location = new System.Drawing.Point(7, 256);
+            this.grpRevueCmdAjout.Location = new System.Drawing.Point(580, 148);
             this.grpRevueCmdAjout.Name = "grpRevueCmdAjout";
-            this.grpRevueCmdAjout.Size = new System.Drawing.Size(476, 100);
+            this.grpRevueCmdAjout.Size = new System.Drawing.Size(273, 208);
             this.grpRevueCmdAjout.TabIndex = 21;
             this.grpRevueCmdAjout.TabStop = false;
-            this.grpRevueCmdAjout.Text = "Ajouter une commande";
+            this.grpRevueCmdAjout.Text = "Ajouter un abonnement";
             // 
             // label91
             // 
             this.label91.AutoSize = true;
             this.label91.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label91.Location = new System.Drawing.Point(216, 48);
+            this.label91.Location = new System.Drawing.Point(6, 134);
             this.label91.Name = "label91";
             this.label91.Size = new System.Drawing.Size(74, 13);
             this.label91.TabIndex = 46;
@@ -3218,7 +3218,7 @@ namespace Mediatek86.vue
             // 
             // dtpDateFinCmdAddRevue
             // 
-            this.dtpDateFinCmdAddRevue.Location = new System.Drawing.Point(296, 42);
+            this.dtpDateFinCmdAddRevue.Location = new System.Drawing.Point(100, 128);
             this.dtpDateFinCmdAddRevue.Name = "dtpDateFinCmdAddRevue";
             this.dtpDateFinCmdAddRevue.Size = new System.Drawing.Size(167, 20);
             this.dtpDateFinCmdAddRevue.TabIndex = 45;
@@ -3226,7 +3226,7 @@ namespace Mediatek86.vue
             // btnSaveCmdRevueAnnuler
             // 
             this.btnSaveCmdRevueAnnuler.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSaveCmdRevueAnnuler.Location = new System.Drawing.Point(367, 72);
+            this.btnSaveCmdRevueAnnuler.Location = new System.Drawing.Point(171, 169);
             this.btnSaveCmdRevueAnnuler.Name = "btnSaveCmdRevueAnnuler";
             this.btnSaveCmdRevueAnnuler.Size = new System.Drawing.Size(96, 22);
             this.btnSaveCmdRevueAnnuler.TabIndex = 44;
@@ -3236,7 +3236,7 @@ namespace Mediatek86.vue
             // 
             // numMontantCmdAddRevue
             // 
-            this.numMontantCmdAddRevue.Location = new System.Drawing.Point(160, 39);
+            this.numMontantCmdAddRevue.Location = new System.Drawing.Point(216, 40);
             this.numMontantCmdAddRevue.Name = "numMontantCmdAddRevue";
             this.numMontantCmdAddRevue.Size = new System.Drawing.Size(49, 20);
             this.numMontantCmdAddRevue.TabIndex = 42;
@@ -3254,7 +3254,7 @@ namespace Mediatek86.vue
             // cboRevue
             // 
             this.cboRevue.FormattingEnabled = true;
-            this.cboRevue.Location = new System.Drawing.Point(73, 63);
+            this.cboRevue.Location = new System.Drawing.Point(131, 63);
             this.cboRevue.Name = "cboRevue";
             this.cboRevue.Size = new System.Drawing.Size(136, 21);
             this.cboRevue.TabIndex = 40;
@@ -3271,14 +3271,14 @@ namespace Mediatek86.vue
             // 
             // dtpDateCmdAddRevue
             // 
-            this.dtpDateCmdAddRevue.Location = new System.Drawing.Point(296, 13);
+            this.dtpDateCmdAddRevue.Location = new System.Drawing.Point(100, 94);
             this.dtpDateCmdAddRevue.Name = "dtpDateCmdAddRevue";
             this.dtpDateCmdAddRevue.Size = new System.Drawing.Size(167, 20);
             this.dtpDateCmdAddRevue.TabIndex = 35;
             // 
             // txbIdCmdAddRevue
             // 
-            this.txbIdCmdAddRevue.Location = new System.Drawing.Point(134, 13);
+            this.txbIdCmdAddRevue.Location = new System.Drawing.Point(190, 13);
             this.txbIdCmdAddRevue.Name = "txbIdCmdAddRevue";
             this.txbIdCmdAddRevue.Size = new System.Drawing.Size(75, 20);
             this.txbIdCmdAddRevue.TabIndex = 20;
@@ -3287,7 +3287,7 @@ namespace Mediatek86.vue
             // 
             this.label96.AutoSize = true;
             this.label96.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label96.Location = new System.Drawing.Point(212, 17);
+            this.label96.Location = new System.Drawing.Point(6, 100);
             this.label96.Name = "label96";
             this.label96.Size = new System.Drawing.Size(78, 13);
             this.label96.TabIndex = 34;
@@ -3306,7 +3306,7 @@ namespace Mediatek86.vue
             // btnSaveCmdRevue
             // 
             this.btnSaveCmdRevue.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSaveCmdRevue.Location = new System.Drawing.Point(265, 72);
+            this.btnSaveCmdRevue.Location = new System.Drawing.Point(69, 169);
             this.btnSaveCmdRevue.Name = "btnSaveCmdRevue";
             this.btnSaveCmdRevue.Size = new System.Drawing.Size(96, 22);
             this.btnSaveCmdRevue.TabIndex = 20;
@@ -3317,7 +3317,7 @@ namespace Mediatek86.vue
             // btnRevueAjouterCmd
             // 
             this.btnRevueAjouterCmd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRevueAjouterCmd.Location = new System.Drawing.Point(655, 16);
+            this.btnRevueAjouterCmd.Location = new System.Drawing.Point(655, 17);
             this.btnRevueAjouterCmd.Name = "btnRevueAjouterCmd";
             this.btnRevueAjouterCmd.Size = new System.Drawing.Size(96, 22);
             this.btnRevueAjouterCmd.TabIndex = 20;
@@ -3328,7 +3328,7 @@ namespace Mediatek86.vue
             // btnRevueSupprCmd
             // 
             this.btnRevueSupprCmd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRevueSupprCmd.Location = new System.Drawing.Point(757, 16);
+            this.btnRevueSupprCmd.Location = new System.Drawing.Point(757, 18);
             this.btnRevueSupprCmd.Name = "btnRevueSupprCmd";
             this.btnRevueSupprCmd.Size = new System.Drawing.Size(96, 22);
             this.btnRevueSupprCmd.TabIndex = 18;
@@ -3377,7 +3377,7 @@ namespace Mediatek86.vue
             this.dgvListeCmdRevue.ReadOnly = true;
             this.dgvListeCmdRevue.RowHeadersVisible = false;
             this.dgvListeCmdRevue.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvListeCmdRevue.Size = new System.Drawing.Size(535, 208);
+            this.dgvListeCmdRevue.Size = new System.Drawing.Size(568, 311);
             this.dgvListeCmdRevue.TabIndex = 4;
             this.dgvListeCmdRevue.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvListeCmdRevue_ColumnHeaderMouseClick);
             this.dgvListeCmdRevue.SelectionChanged += new System.EventHandler(this.dgvListeCmdRevue_SelectionChanged);
