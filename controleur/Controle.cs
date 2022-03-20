@@ -3,11 +3,12 @@ using Mediatek86.modele;
 using Mediatek86.metier;
 using Mediatek86.vue;
 using System;
+using Serilog;
 
 
 namespace Mediatek86.controleur
 {
-    internal class Controle
+    public class Controle
     {
         private readonly List<Livre> lesLivres;
         private readonly List<Dvd> lesDvd;
@@ -22,6 +23,12 @@ namespace Mediatek86.controleur
         /// </summary>
         public Controle()
         {
+            Log.Logger = new LoggerConfiguration()
+                .WriteTo.Console()
+                .WriteTo.File("logs/logs.txt", 
+                rollingInterval: RollingInterval.Day)               
+                .CreateLogger();
+
             lesLivres = Dao.GetAllLivres();
             lesDvd = Dao.GetAllDvd();
             lesRevues = Dao.GetAllRevues();

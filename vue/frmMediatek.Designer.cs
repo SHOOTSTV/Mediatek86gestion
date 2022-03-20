@@ -2244,7 +2244,7 @@ namespace Mediatek86.vue
             this.grpLivresCmdAjout.Controls.Add(this.label78);
             this.grpLivresCmdAjout.Controls.Add(this.label77);
             this.grpLivresCmdAjout.Enabled = false;
-            this.grpLivresCmdAjout.Location = new System.Drawing.Point(9, 251);
+            this.grpLivresCmdAjout.Location = new System.Drawing.Point(5, 256);
             this.grpLivresCmdAjout.Name = "grpLivresCmdAjout";
             this.grpLivresCmdAjout.Size = new System.Drawing.Size(469, 100);
             this.grpLivresCmdAjout.TabIndex = 18;
@@ -2433,7 +2433,7 @@ namespace Mediatek86.vue
             this.dgvListeCmdLivres.ReadOnly = true;
             this.dgvListeCmdLivres.RowHeadersVisible = false;
             this.dgvListeCmdLivres.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvListeCmdLivres.Size = new System.Drawing.Size(540, 200);
+            this.dgvListeCmdLivres.Size = new System.Drawing.Size(540, 206);
             this.dgvListeCmdLivres.TabIndex = 4;
             this.dgvListeCmdLivres.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvListeCmdLivres_ColumnHeaderMouseClick);
             this.dgvListeCmdLivres.SelectionChanged += new System.EventHandler(this.dgvListeCmdLivres_SelectionChanged);
@@ -2664,7 +2664,7 @@ namespace Mediatek86.vue
             this.groupBox1.Controls.Add(this.label58);
             this.groupBox1.Controls.Add(this.txbDvdNumRechercheCmd);
             this.groupBox1.Controls.Add(this.dgvListeCmdDvd);
-            this.groupBox1.Location = new System.Drawing.Point(6, 6);
+            this.groupBox1.Location = new System.Drawing.Point(4, 6);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(859, 362);
             this.groupBox1.TabIndex = 20;
@@ -2680,7 +2680,7 @@ namespace Mediatek86.vue
             this.grpDvdCmdModif.Controls.Add(this.label90);
             this.grpDvdCmdModif.Controls.Add(this.btnEditCmdDvd);
             this.grpDvdCmdModif.Enabled = false;
-            this.grpDvdCmdModif.Location = new System.Drawing.Point(582, 256);
+            this.grpDvdCmdModif.Location = new System.Drawing.Point(580, 256);
             this.grpDvdCmdModif.Name = "grpDvdCmdModif";
             this.grpDvdCmdModif.Size = new System.Drawing.Size(271, 100);
             this.grpDvdCmdModif.TabIndex = 22;
@@ -2760,7 +2760,7 @@ namespace Mediatek86.vue
             this.grpDvdCmdAjout.Controls.Add(this.label88);
             this.grpDvdCmdAjout.Controls.Add(this.btnSaveCmdDvd);
             this.grpDvdCmdAjout.Enabled = false;
-            this.grpDvdCmdAjout.Location = new System.Drawing.Point(0, 256);
+            this.grpDvdCmdAjout.Location = new System.Drawing.Point(6, 256);
             this.grpDvdCmdAjout.Name = "grpDvdCmdAjout";
             this.grpDvdCmdAjout.Size = new System.Drawing.Size(469, 100);
             this.grpDvdCmdAjout.TabIndex = 21;
@@ -3177,7 +3177,7 @@ namespace Mediatek86.vue
             this.groupBox3.Controls.Add(this.label98);
             this.groupBox3.Controls.Add(this.txbRevueNumRechercheCmd);
             this.groupBox3.Controls.Add(this.dgvListeCmdRevue);
-            this.groupBox3.Location = new System.Drawing.Point(6, 6);
+            this.groupBox3.Location = new System.Drawing.Point(5, 6);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(859, 362);
             this.groupBox3.TabIndex = 21;
@@ -3199,7 +3199,7 @@ namespace Mediatek86.vue
             this.grpRevueCmdAjout.Controls.Add(this.label97);
             this.grpRevueCmdAjout.Controls.Add(this.btnSaveCmdRevue);
             this.grpRevueCmdAjout.Enabled = false;
-            this.grpRevueCmdAjout.Location = new System.Drawing.Point(0, 256);
+            this.grpRevueCmdAjout.Location = new System.Drawing.Point(7, 256);
             this.grpRevueCmdAjout.Name = "grpRevueCmdAjout";
             this.grpRevueCmdAjout.Size = new System.Drawing.Size(476, 100);
             this.grpRevueCmdAjout.TabIndex = 21;
@@ -3210,7 +3210,7 @@ namespace Mediatek86.vue
             // 
             this.label91.AutoSize = true;
             this.label91.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label91.Location = new System.Drawing.Point(216, 46);
+            this.label91.Location = new System.Drawing.Point(216, 48);
             this.label91.Name = "label91";
             this.label91.Size = new System.Drawing.Size(74, 13);
             this.label91.TabIndex = 46;
@@ -3287,11 +3287,11 @@ namespace Mediatek86.vue
             // 
             this.label96.AutoSize = true;
             this.label96.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label96.Location = new System.Drawing.Point(248, 16);
+            this.label96.Location = new System.Drawing.Point(212, 17);
             this.label96.Name = "label96";
-            this.label96.Size = new System.Drawing.Size(42, 13);
+            this.label96.Size = new System.Drawing.Size(78, 13);
             this.label96.TabIndex = 34;
-            this.label96.Text = "Date :";
+            this.label96.Text = "Date début :";
             // 
             // label97
             // 

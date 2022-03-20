@@ -47,7 +47,7 @@ namespace Mediatek86.vue
         #endregion
 
 
-        internal FrmMediatek(Controle controle, Service service)
+        public FrmMediatek(Controle controle, Service service)
         {
             InitializeComponent();
             this.controle = controle;
@@ -1342,6 +1342,10 @@ namespace Mediatek86.vue
             dgvListeCmdLivres.Columns["typepublic"].Visible = false;
             dgvListeCmdLivres.Columns["titre"].Visible = false;
             dgvListeCmdLivres.Columns["image"].Visible = false;
+
+            dgvListeCmdLivres.Columns["montant"].HeaderText = "Montant (€)";
+            dgvListeCmdLivres.Columns["nbexemplaire"].HeaderText = "Nombre d'exemplaire";
+            dgvListeCmdLivres.Columns["libelle"].HeaderText = "Etat du Suivi";
             dgvListeCmdLivres.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
 
@@ -1363,6 +1367,10 @@ namespace Mediatek86.vue
             dgvListeCmdLivres.Columns["typepublic"].Visible = false;
             dgvListeCmdLivres.Columns["titre"].Visible = false;
             dgvListeCmdLivres.Columns["image"].Visible = false;
+
+            dgvListeCmdLivres.Columns["montant"].HeaderText = "Montant (€)";
+            dgvListeCmdLivres.Columns["nbexemplaire"].HeaderText = "Nombre d'exemplaire";
+            dgvListeCmdLivres.Columns["libelle"].HeaderText = "Etat du Suivi";
             dgvListeCmdLivres.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
 
@@ -1431,7 +1439,6 @@ namespace Mediatek86.vue
             }
         }
 
-
         /// <summary>
         /// Sur la sélection d'une ligne ou cellule dans le grid
         /// affichage des informations du livre
@@ -1474,6 +1481,7 @@ namespace Mediatek86.vue
             txbIdCmdAdd.Text = "";
             numMontantCmdAdd.Value = 0;
             numNbExemplaireCmdAdd.Value = 0;
+            dtpDateCmdAdd.Value = DateTime.Today;
         }
 
         /// <summary>
@@ -1562,8 +1570,7 @@ namespace Mediatek86.vue
                 grpLivresCmdAjout.Enabled = false;
                 AddCmdLivre = false;
                 VideLivreAjoutCmd();
-            }
-            
+            }            
             RemplirEditCmdLivre(laCommande);
         }
 
@@ -1619,7 +1626,7 @@ namespace Mediatek86.vue
         }
 
         /// <summary>
-        /// Demande de modification du suivi d'une commande
+        /// Demande de modification du suivi d'une commande de livres
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1641,11 +1648,13 @@ namespace Mediatek86.vue
                 RemplirEditCmdLivre(laCommande);
                 return;
             }
-
-            controle.EditCommande(laCommande.Id, suiviId);
-            InitDataGridViewLivre();
-            ViderEditCmdLivre();
-            grpLivresCmdModif.Enabled = false;
+            if(MessageBox.Show("Etes vous sûr?", "Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                controle.EditCommande(laCommande.Id, suiviId);
+                InitDataGridViewLivre();
+                ViderEditCmdLivre();
+                grpLivresCmdModif.Enabled = false;
+            }            
         }
 
         /// <summary>
@@ -1681,7 +1690,7 @@ namespace Mediatek86.vue
         }
 
         /// <summary>
-        /// Tri sur les colonnes
+        /// Tri sur les colonnes de commandes de livres
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1699,13 +1708,13 @@ namespace Mediatek86.vue
                 case "DateCommande":
                     sortedList = lesCommandesLivres.OrderByDescending(o => o.DateCommande).ToList();
                     break;
-                case "Montant":
+                case "Montant (€)":
                     sortedList = lesCommandesLivres.OrderByDescending(o => o.Montant).ToList();
                     break;
-                case "NbExemplaire":
+                case "Nombre d'exemplaire":
                     sortedList = lesCommandesLivres.OrderByDescending(o => o.NbExemplaire).ToList();
                     break;
-                case "Libelle":
+                case "Etat du Suivi":
                     sortedList = lesCommandesLivres.OrderByDescending(o => o.Libelle).ToList();
                     break;
             }
@@ -1753,6 +1762,10 @@ namespace Mediatek86.vue
             dgvListeCmdDvd.Columns["typepublic"].Visible = false;
             dgvListeCmdDvd.Columns["titre"].Visible = false;
             dgvListeCmdDvd.Columns["image"].Visible = false;
+
+            dgvListeCmdDvd.Columns["montant"].HeaderText = "Montant (€)";
+            dgvListeCmdDvd.Columns["nbexemplaire"].HeaderText = "Nombre d'exemplaire";
+            dgvListeCmdDvd.Columns["libelle"].HeaderText = "Etat du Suivi";
             dgvListeCmdDvd.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
 
@@ -1774,6 +1787,10 @@ namespace Mediatek86.vue
             dgvListeCmdDvd.Columns["typepublic"].Visible = false;
             dgvListeCmdDvd.Columns["titre"].Visible = false;
             dgvListeCmdDvd.Columns["image"].Visible = false;
+
+            dgvListeCmdDvd.Columns["montant"].HeaderText = "Montant (€)";
+            dgvListeCmdDvd.Columns["nbexemplaire"].HeaderText = "Nombre d'exemplaire";
+            dgvListeCmdDvd.Columns["libelle"].HeaderText = "Etat du Suivi";
             dgvListeCmdDvd.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
 
@@ -1885,6 +1902,7 @@ namespace Mediatek86.vue
             txbIdCmdAddDvd.Text = "";
             numMontantCmdAddDvd.Value = 0;
             numNbExemplaireCmdAddDvd.Value = 0;
+            dtpDateCmdAddDvd.Value = DateTime.Today;
         }
 
         /// <summary>
@@ -2051,11 +2069,13 @@ namespace Mediatek86.vue
                 RemplirEditCmdDvd(laCommande);
                 return;
             }
-
-            controle.EditCommande(laCommande.Id, suiviId);
-            InitDataGridViewDvd();
-            ViderDvdCmdEdit();
-            grpDvdCmdModif.Enabled = false;
+            if (MessageBox.Show("Etes vous sûr?", "Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                controle.EditCommande(laCommande.Id, suiviId);
+                InitDataGridViewDvd();
+                ViderDvdCmdEdit();
+                grpDvdCmdModif.Enabled = false;
+            }
         }
 
         /// <summary>
@@ -2091,7 +2111,7 @@ namespace Mediatek86.vue
         }
 
         /// <summary>
-        /// Tri sur les colonnes
+        /// Tri sur les colonnes de commandes de dvd
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -2109,13 +2129,13 @@ namespace Mediatek86.vue
                 case "DateCommande":
                     sortedList = lesCommandesDvd.OrderByDescending(o => o.DateCommande).ToList();
                     break;
-                case "Montant":
+                case "Montant (€)":
                     sortedList = lesCommandesDvd.OrderByDescending(o => o.Montant).ToList();
                     break;
-                case "NbExemplaire":
+                case "Nombre d'exemplaire":
                     sortedList = lesCommandesDvd.OrderByDescending(o => o.NbExemplaire).ToList();
                     break;
-                case "Libelle":
+                case "Etat du Suivi":
                     sortedList = lesCommandesDvd.OrderByDescending(o => o.Libelle).ToList();
                     break;
             }
@@ -2160,6 +2180,9 @@ namespace Mediatek86.vue
             dgvListeCmdRevue.Columns["titre"].Visible = false;
             dgvListeCmdRevue.Columns["image"].Visible = false;
             dgvListeCmdRevue.Columns["empruntable"].Visible = false;
+
+            dgvListeCmdRevue.Columns["montant"].HeaderText = "Montant (€)";
+            dgvListeCmdRevue.Columns["datefinabo"].HeaderText = "DateFinAbonnement";
             dgvListeCmdRevue.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
 
@@ -2403,7 +2426,7 @@ namespace Mediatek86.vue
         /// <param name="dateFinAbonnement"></param>
         /// <param name="dateParution"></param>
         /// <returns></returns>
-        private bool ParutionDansAbonnement(DateTime dateCommande, DateTime dateFinAbonnement, DateTime dateParution)
+        public bool ParutionDansAbonnement(DateTime dateCommande, DateTime dateFinAbonnement, DateTime dateParution)
         {
             return (dateParution > dateCommande && dateParution < dateFinAbonnement);
         }
@@ -2427,10 +2450,10 @@ namespace Mediatek86.vue
                 case "DateCommande":
                     sortedList = lesCommandesRevues.OrderByDescending(o => o.DateCommande).ToList();
                     break;
-                case "Montant":
+                case "Montant (€)":
                     sortedList = lesCommandesRevues.OrderByDescending(o => o.Montant).ToList();
                     break;
-                case "DateFinAbo":
+                case "DateFinAbonnement":
                     sortedList = lesCommandesRevues.OrderByDescending(o => o.DateFinAbo).ToList();
                     break;
             }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Mediatek86.bdd;
 using System;
 using System.Windows.Forms;
+using Serilog;
 
 namespace Mediatek86.modele
 {
@@ -34,11 +35,13 @@ namespace Mediatek86.modele
             if (curs.Read())
             {
                 Service service = new Service((string)curs.Field("identifiant"), (int)curs.Field("service"), (string)curs.Field("nom"));
+                Log.Information("L'utilisateur {0} s'est connecté, il fait appartient au service {1}", service.Utilisateur, service.Nom);
                 curs.Close();
                 return service;
             }
             else
             {
+                Log.Information("Echec de la connexion");
                 curs.Close();
                 return null;
             }
@@ -289,8 +292,9 @@ namespace Mediatek86.modele
                 curs.Close();
                 return lesSuivis;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                Log.Information("Echec de la récupération des suivis de la BDD : {0}", e);
                 return lesSuivis;
             }
         }
@@ -317,7 +321,9 @@ namespace Mediatek86.modele
                 curs.ReqUpdate(req, parameters);
                 curs.Close();
                 return true;
-            }catch{
+            }catch (Exception e)
+            {
+                Log.Information("Echec de l'insertion d'un exemplaire dans la bdd : {0}", e);
                 return false;
             }
         }
@@ -368,8 +374,9 @@ namespace Mediatek86.modele
                 curs.Close();
                 return lesCommandesLivres;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                Log.Information("Echec de la récupération des commandes de livres dans la bdd : {0}", e);
                 return lesCommandesLivres;
             }
         }
@@ -496,8 +503,9 @@ namespace Mediatek86.modele
                 curs.Close();
                 return lesCommandesDvd;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                Log.Information("Echec de la récupération des commandes de dvd dans la bdd : {0}", e);
                 return lesCommandesDvd;
             }
         }
@@ -547,8 +555,9 @@ namespace Mediatek86.modele
                 curs.Close();
                 return lesCommandesRevues;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                Log.Information("Echec de la récupération des commandes de revues dans la bdd : {0}", e);
                 return lesCommandesRevues;
             }
         }
@@ -574,8 +583,9 @@ namespace Mediatek86.modele
                 curs.Close();
                 return true;
             }
-            catch
+            catch (Exception e)
             {
+                Log.Information("Echec de l'ajout d'un abonnement dans la BDD : {0}", e);
                 return false;
             }
         }
