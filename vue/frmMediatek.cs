@@ -421,6 +421,16 @@ namespace Mediatek86.vue
             RemplirComboCategorie(controle.GetAllPublics(), bdgPublics, cbxLivresPublics);
             RemplirComboCategorie(controle.GetAllRayons(), bdgRayons, cbxLivresRayons);
             RemplirLivresListeComplete();
+            // Si le service est admin alors affichage du pop-up qui montre les abonnements 
+            // finnissant dans moins de 31jours
+            if (service.ServiceInt == 1)
+            {
+                string getabo30days = controle.GetAbo30days();
+                if (getabo30days != "")
+                {
+                    MessageBox.Show(getabo30days, "Abonnements finissants dans moins de 30 jours (Titre-Date de fin) :", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
         }
 
         /// <summary>

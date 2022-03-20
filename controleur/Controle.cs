@@ -224,6 +224,12 @@ namespace Mediatek86.controleur
             Dao.DeleteCmdAbonnement(id);
             Dao.DeleteCmd(id);
         }
+
+        public string GetAbo30days()
+        {
+            string getabo30days = Dao.GetAbo30days();
+            return getabo30days;
+        }
     }
 
 }

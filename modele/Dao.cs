@@ -602,5 +602,41 @@ namespace Mediatek86.modele
             BddMySql curs = BddMySql.GetInstance(connectionString);
             curs.ReqUpdate(req, parameters);
         }
+
+        /// <summary>
+        /// Demande d'éxecuter la fonction qui va récuperer 
+        /// tout les abonnements finnissant dans moins de 31jours
+        /// </summary>
+        /// <returns></returns>
+        public static string GetAbo30days()
+        {
+            int nb = 0;
+            if (nb == 0)
+            {
+                try
+                {
+                    string req = "SELECT aboBelow30Days() AS string;";
+                    BddMySql curs = BddMySql.GetInstance(connectionString);
+                    curs.ReqSelect(req, null);
+                    string procedure = "";
+                    while (curs.Read())
+                    {
+                        procedure = (string)curs.Field("string");
+                        procedure = procedure.Replace(" blank ", "\n");
+                    }
+                    nb++;
+                    return procedure;
+                }
+                catch
+                {
+                    nb++;
+                    return "";
+                }
+            }
+            else
+            {
+                return "";
+            }
+        }
     }
 }
