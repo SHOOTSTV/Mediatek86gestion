@@ -49,7 +49,11 @@ namespace Mediatek86.vue
 
         #endregion
 
-
+        /// <summary>
+        /// initialisation du form
+        /// </summary>
+        /// <param name="controle"></param>
+        /// <param name="service"></param>
         public FrmMediatek(Controle controle, Service service)
         {
             InitializeComponent();
@@ -1958,7 +1962,7 @@ namespace Mediatek86.vue
         /// <summary>
         /// Affiche les valeurs dans les combobox de modification d'une commande
         /// </summary>
-        /// <param name="document"></param>
+        /// <param name="dvd"></param>
         private void RemplirEditCmdDvd(CommandeDocumentDvd dvd)
         {
             txbIdCmdEditDvd.Text = dvd.Id;

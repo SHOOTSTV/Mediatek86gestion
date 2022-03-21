@@ -24,8 +24,8 @@
         /// </summary>
         public string Id { get => id; }
         /// <summary>
-        /// getter sur le libelle de la catégorie
-        /// </summary
+        /// getter sur le libelle de la categorie
+        /// </summary>
         public string Libelle { get => libelle; }
 
         /// <summary>
