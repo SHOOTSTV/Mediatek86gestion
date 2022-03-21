@@ -45,8 +45,8 @@ namespace Mediatek86.controleur
         /// <summary>
         /// demande de vérification du login
         /// </summary>
-        /// <param name="login"></param>
-        /// <param name="pwd"></param>
+        /// <param name="identifiant"></param>
+        /// <param name="mdp"></param>
         /// <returns></returns>
         public Service ControleAuthentification(string identifiant, string mdp)
         {
@@ -211,7 +211,7 @@ namespace Mediatek86.controleur
         /// <summary>
         /// Demande d'ajout d'un abonnement
         /// </summary>
-        /// <param name="commande"></param>
+        /// <param name="abonnement"></param>
         public void AddAbonnementRevue(Abonnement abonnement)
         {
             Dao.AddAbonnementRevue(abonnement);
