@@ -1345,8 +1345,8 @@ namespace Mediatek86.vue
         /// </summary>
         private void InitDataGridViewLivre()
         {
-            List<CommandeDocumentLivre> documents = controle.GetAllCommandesLivres();
-            bdgLivresListeCmd.DataSource = documents;
+            List<CommandeDocumentLivre> livres = controle.GetAllCommandesLivres();
+            bdgLivresListeCmd.DataSource = livres;
             dgvListeCmdLivres.DataSource = bdgLivresListeCmd;
             // dgvListeCmdLivres.Columns["id"].Visible = false;
             dgvListeCmdLivres.Columns["idlivredvd"].Visible = false;
@@ -1369,9 +1369,9 @@ namespace Mediatek86.vue
         /// <summary>
         /// Remplit le dategrid avec l'id d'un livre reçue en paramètre
         /// </summary>
-        private void InitDataGridViewLivreRecherche(List<CommandeDocumentLivre> documents)
+        private void InitDataGridViewLivreRecherche(List<CommandeDocumentLivre> livres)
         {
-            bdgLivresListeCmd.DataSource = documents;
+            bdgLivresListeCmd.DataSource = livres;
             dgvListeCmdLivres.DataSource = bdgLivresListeCmd;
             // dgvListeCmdLivres.Columns["id"].Visible = false;
             dgvListeCmdLivres.Columns["idlivredvd"].Visible = false;
@@ -1438,11 +1438,11 @@ namespace Mediatek86.vue
         {
             if (!txbLivresNumRechercheCmd.Text.Equals(""))
             {
-                List<CommandeDocumentLivre> documents = lesCommandesLivres.FindAll(x => x.IdLivredvd.Equals(txbLivresNumRechercheCmd.Text));
+                List<CommandeDocumentLivre> livres = lesCommandesLivres.FindAll(x => x.IdLivredvd.Equals(txbLivresNumRechercheCmd.Text));
                 txbLivresNumRechercheCmd.Text = "";
-                if (documents.Any())
+                if (livres.Any())
                 {             
-                    InitDataGridViewLivreRecherche(documents);
+                    InitDataGridViewLivreRecherche(livres);
                 }
                 else
                 {
