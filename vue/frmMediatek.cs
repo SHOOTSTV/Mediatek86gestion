@@ -30,7 +30,6 @@ namespace Mediatek86.vue
         private readonly BindingSource bdgLivresListeCmd = new BindingSource();
         private readonly BindingSource bdgDvdListeCmd = new BindingSource();
         private readonly BindingSource bdgRevueListeCmd = new BindingSource();
-
         private readonly BindingSource bdgStatutListe = new BindingSource();
 
         private List<Livre> lesLivres = new List<Livre>();
@@ -1392,7 +1391,7 @@ namespace Mediatek86.vue
         }
 
         /// <summary>
-        /// Affichage des informations du livre qui correspond à la commande sélectionné
+        /// Affichage des informations du livre
         /// </summary>
         /// <param name="document"></param>
         private void AfficheLivresInfosCmd(CommandeDocumentLivre document)

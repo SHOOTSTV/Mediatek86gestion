@@ -11,6 +11,7 @@ namespace Mediatek86.modele
     /// </summary>
     public static class Dao
     {
+        private static int nb = 0;
         // connexion à la BDD
         private static readonly string server = "localhost";
         private static readonly string userid = "root";
@@ -611,8 +612,8 @@ namespace Mediatek86.modele
         /// </summary>
         /// <returns></returns>
         public static string GetAbo30days()
-        {
-            int nb = 0;
+        {   
+            // Permet d'afficher qu'une seule fois la pop-up au démarrage
             if (nb == 0)
             {
                 try
