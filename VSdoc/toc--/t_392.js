@@ -1,0 +1,1 @@
+c['392']=[['393',"FrmMediatek Constructor","topic_0000000000000141.html",0],['394',"Methods","topic_0000000000000140_methods--.html",1]];

@@ -1,0 +1,1 @@
+search_result['392']=["topic_0000000000000101.html","Exemplaire.Photo Property","getter setter sur le lien d\u0027une photo d\u0027un exemplaire"];

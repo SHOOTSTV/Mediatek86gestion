@@ -1,0 +1,1 @@
+search_result['521']=["topic_000000000000014B.html","FrmMediatek.ParutionDansAbonnement Method","retourne vrai si la date de parution est entre les 2 autres dates"];

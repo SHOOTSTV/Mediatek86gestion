@@ -1,0 +1,1 @@
+search_result['340']=["topic_00000000000000E1.html","CommandeRevue.Empruntable Property","getter qui retourne vrai ou faux si une revue est empruntable"];

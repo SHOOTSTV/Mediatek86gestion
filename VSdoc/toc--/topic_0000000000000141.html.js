@@ -1,0 +1,1 @@
+var breadcrumbs=[['-1',"",""],['2',"SOLUTION-WIDE PROPERTIES Reference","topic_0000000000000167.html"],['391',"Mediatek86.vue Namespace","topic_000000000000013D.html"],['392',"FrmMediatek Class","topic_0000000000000140.html"],['393',"FrmMediatek Constructor","topic_0000000000000141.html"]];

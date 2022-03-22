@@ -1,0 +1,1 @@
+search_result['348']=["topic_00000000000000E9.html","Document Class","Classe qui gère le constructeur des Documents"];

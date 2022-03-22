@@ -1,0 +1,1 @@
+search_result['476']=["topic_0000000000000128.html","Dao.GetAllGenres Method","/// Retourne tous les genres à partir de la BDD\r\n        ///"];

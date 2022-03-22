@@ -1,0 +1,1 @@
+search_result['395']=["topic_0000000000000104.html","Exemplaire.IdDocument Property","getter setter sur l\u0027id du document"];

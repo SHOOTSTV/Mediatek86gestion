@@ -1,0 +1,1 @@
+search_result['358']=["topic_00000000000000EE.html","Document.IdGenre Property","getter sur l\u0027id du genre du document"];

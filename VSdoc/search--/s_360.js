@@ -1,0 +1,1 @@
+search_result['360']=["topic_00000000000000F0.html","Document.IdPublic Property","getter sur l\u0027id du type de public du document"];

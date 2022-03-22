@@ -1,0 +1,1 @@
+search_result['442']=["topic_0000000000000115.html","Revue.Periodicite Property","getter setter sur la periodicite d\u0027une revue"];

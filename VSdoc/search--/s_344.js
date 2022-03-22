@@ -1,0 +1,1 @@
+search_result['344']=["topic_00000000000000E5.html","CommandeRevue.Genre Property","getter sur le genre de la revue lié à la commande"];
