@@ -1,0 +1,1 @@
+search_result['410']=["topic_0000000000000109.html","Livre.Isbn Property","getter sur le numéro isbn d\u0027un livre"];

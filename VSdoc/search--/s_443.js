@@ -1,0 +1,1 @@
+search_result['443']=["topic_0000000000000116.html","Revue.Empruntable Property","getter setter qui retourne vrai ou faux si la revue est empruntable"];

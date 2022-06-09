@@ -1,0 +1,1 @@
+var breadcrumbs=[['-1',"",""],['2',"SOLUTION-WIDE PROPERTIES Reference","topic_0000000000000167.html"],['411',"Mediatek86.vue.Tests Namespace","topic_0000000000000164.html"],['412',"FrmMediatekTests Class","topic_0000000000000165.html"],['413',"Methods","topic_0000000000000165_methods--.html"]];

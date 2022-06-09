@@ -1,0 +1,1 @@
+search_result['444']=["topic_0000000000000117.html","Revue.DelaiMiseADispo Property","getter setter sur le délai de mise à disposition d\u0027une revue"];

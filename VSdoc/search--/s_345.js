@@ -1,0 +1,1 @@
+search_result['345']=["topic_00000000000000E6.html","CommandeRevue.Typepublic Property","getter sur le type de public de la revue lié à la commande"];

@@ -1,0 +1,1 @@
+var breadcrumbs=[['-1',"",""],['2',"SOLUTION-WIDE PROPERTIES Reference","topic_0000000000000167.html"],['110',"Mediatek86.bdd Namespace","topic_0000000000000000.html"],['111',"BddMySql Class","topic_0000000000000001.html"],['112',"Methods","topic_0000000000000001_methods--.html"],['117',"ReqSelect Method","topic_0000000000000003.html"]];

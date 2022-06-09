@@ -1,0 +1,1 @@
+search_result['342']=["topic_00000000000000E3.html","CommandeRevue.DelaiMiseADispo Property","getter sur le délai de la mise à disposition de la revue"];
