@@ -43,7 +43,7 @@ namespace Mediatek86.modele.Tests
         {
             string identifiant = "admin";
             string mdp = "admin";
-                        
+
             Service testlogin = Dao.ControleAuthentification(identifiant, mdp);
             Assert.IsNotNull(testlogin);
         }
@@ -172,7 +172,7 @@ namespace Mediatek86.modele.Tests
             DateTime date = DateTime.Today;
             int montant = 1;
             Commande commande = new Commande(id, date, montant);
-            Dao.AddCommande(commande);           
+            Dao.AddCommande(commande);
             Assert.IsNotNull(commande);
             EndTransaction();
         }
@@ -217,14 +217,14 @@ namespace Mediatek86.modele.Tests
             Commande commande = new Commande(id, date, montant);
             Dao.AddCommande(commande);
             // création de la commandedocument
-            string idcmd = "Test2"; 
+            string idcmd = "Test2";
             int nbExemplaire = 1;
             string idLivreDvd = "00007";
             CommandeDocument commandedocument = new CommandeDocument(idcmd, nbExemplaire, idLivreDvd);
             Dao.AddCommandeDocument(commandedocument);
 
             // on reprends la commande crée juste en haut
-            string idcommande = "Test2"; 
+            string idcommande = "Test2";
             // on met le suivi à 'réglée.'
             string idSuivi = "00003";
             Dao.EditCommande(idcommande, idSuivi);
@@ -266,13 +266,13 @@ namespace Mediatek86.modele.Tests
         [TestMethod()]
         public void DeleteCmdTest()
         {
-            StartTransaction();            
+            StartTransaction();
             // création d'une commande pour pouvoir la supprimer
             string id = "Test3";
             DateTime date = DateTime.Today;
             int montant = 1;
             Commande commande = new Commande(id, date, montant);
-            Dao.AddCommande(commande);         
+            Dao.AddCommande(commande);
             // Suppression de la commande concernant l'id mis en paramètre 
             Dao.DeleteCmd(id);
             // Vérifie si l'id est null après la suppression
